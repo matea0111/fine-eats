@@ -15,6 +15,7 @@ module.exports.isLoggedIn = (req, res, next) =>{
 
 
 module.exports.validateRestaurant = (req, res, next) => {
+    console.log(req.body, 'branko');
     const {error} = restaurantSchema.validate(req.body);
     if(error){
         const msg = error.details.map(el => el.message).join(',')

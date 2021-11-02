@@ -6,10 +6,10 @@ module.exports.restaurantSchema = Joi.object({
     restaurant: Joi.object({
         title: Joi.string().trim().min(1).required(),
         location: Joi.string().trim().min(1).required(),
+        category: Joi.any().allow(),
         price: Joi.string().required().min(1),
         //image: Joi.string().required(),
-        description: Joi.string().allow('')
-
+        description: Joi.string().allow(''),
     }).required()
 });
 

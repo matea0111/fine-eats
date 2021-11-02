@@ -38,8 +38,7 @@ module.exports.AddNewForm = async(req, res) => {
 }
 
 module.exports.createRestaurant = async (req,res,next) => {
-/*     console.log(req.body.category);
- */    const geoData = await geocoder.forwardGeocode({
+    const geoData = await geocoder.forwardGeocode({
         query: req.body.restaurant.location,
         limit:1
     }).send()

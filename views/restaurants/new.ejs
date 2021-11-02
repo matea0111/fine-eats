@@ -22,14 +22,16 @@
                     <div class="invalid-feedback">
                         Please provide a valid location.
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" id="category" for="category">Category</label>
-                        <select class="form-control" onchange="myFunction(this.value)">
-                            <% for (const i in categoryList) { %>
-                                <option value="<%= categoryList[i].name %>"> <%= categoryList[i].name %> </option>
-                            <% } %>
-                        </select>
-                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"  for="category">Category</label>
+                    <input class="form-control" type="hidden" id="category" value="<%=categoryList[0]._id%>" name="category" required> 
+                    <select  onchange="myFunction(this.value)">
+                        <% for (const i in categoryList) { %>
+                            <option value="<%= categoryList[i]._id %>"> <%= categoryList[i].name %> </option>
+                        <% } %>
+                    </select>
+                </div>
                 </div>
                 <div>
                 <input type="file" name="image" id="" multiple required>
