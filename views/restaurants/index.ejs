@@ -1,8 +1,18 @@
 <% layout('layouts/boilerplate')%>
-<div id="map" style="width:100%; height: 500px"></div>
+<div id="map" style="width:100%; height: 500px; margin-bottom:2em"></div>
 <div class="container" id="restaurants-container">
 <h1></h1>
-    
+    <div>
+            <div class="mb-3">
+                <label class="form-label"  for="category">Category</label>
+                <input type="hidden" id="category" value="all" name="category" required> 
+                <select  onchange="myFunction(this.value)">
+                    <% for (const i in categoryList) { %>
+                        <option value="<%= categoryList[i].name%>"> <%= categoryList[i].name %> </option>
+                    <% } %>
+                </select>
+            </div>
+    </div>
 
 <% for (let restaurant of restaurants.docs) {%>
     <div class="card border-0 mb-2" >
@@ -40,3 +50,9 @@
  <script src = "/JSs/clusterMap.js"></script> 
  <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src = "/JSs/paginate.js"></script>
+ <script>
+    function myFunction(val) {
+      document.getElementById('category').value=val;
+      window.location.replace('/restaurants?category='.concat(val));
+    }
+</script>

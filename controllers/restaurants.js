@@ -8,17 +8,21 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken});
 
 
 module.exports.index = async (req, res) => {
+    const { category, name, page } = req.query;
+    var categoryCondition = category ? { category } : {};
+    var nameCondition = name ? { name } : {};
+
     if(!req.query.page){
-       const restaurants = await Restaurant.paginate({}, {
+       const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
         populate: {
             path: 'popupText'
         }
     });
-    
-    res.render('restaurants/index', {restaurants})
+    const categoryList = await categories.find({}); 
+    res.render('restaurants/index', {restaurants,categoryList})
     } else {
         const {page}= req.query;
-        const restaurants = await Restaurant.paginate({}, {
+        const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
             page,
             populate: {
                 path: 'popupText'
