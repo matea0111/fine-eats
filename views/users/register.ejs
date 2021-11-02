@@ -1,0 +1,49 @@
+<% layout('layouts/boilerplate')%>
+
+<h1>REGISTER</h1>
+<form action="/register" method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label class="form-label" for="username"> Username</label>
+        <input class="form-control" type="text" id="username" name="username" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    <div class="mb-3">
+        <label class="form-label" for="email"> E-Mail</label>
+        <input class="form-control" type="email" id="email" name="email" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>  
+    <div class="mb-3">
+        <label class="form-label" for="firstName"> First Name:</label>
+        <input class="form-control" type="text" id="firstName" name="firstName" required>
+        <div class="valid-feedback">
+             Looks good!
+        </div>
+    <div class="mb-3">
+        <label class="form-label" for="lastName"> Last Name:</label>
+        <input class="form-control" type="text" id="lastName" name="lastName" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    <div class="mb-3">
+        <label class="form-label" for="avatar">Avatar Url:</label>
+        <input class="form-control" type="text" id="avatar" name="avatar" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        
+    <div class="mb-3">
+        <label class="form-label" for="password"> Password</label>
+        <input class="form-control" type="password" id="password" name="password" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    <div class="mb-3">
+        <label class="form-label" for="adminCode"> Admin Code</label>
+        <input class="form-control" type="text" id="adminCode" name="adminCode" placeholder="Admin code" >
+        <div class="valid-feedback">
+            Looks good!
+        </div>    
+    <button class="btn btn-dark mt-3">Register</button>
+</form>

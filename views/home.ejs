@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-Eats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">    
+    <link rel="stylesheet" href="./CSS/homepage.css">
+</head>
+
+<body>
+    <header>
+        <% if(currentUser) {%> 
+            <div class="wrapper">
+            <ul class="nav-area">
+                <li><a href="/restaurants">Home</a></li>
+                <li><a class="nav-link" href="/logout">Log Out</a></li>
+            </ul>
+        </div>
+        <% } else {  %> 
+        <div class="wrapper">
+            <ul class="nav-area">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+        <% } %> 
+        <div class="welcome-text">
+            <h1>
+                 <span>Fine-Eats</span></h1>
+            <a href="/restaurants">Check restaurants</a>
+        </div>
+    </header>
+
+</body>
+
+</html>

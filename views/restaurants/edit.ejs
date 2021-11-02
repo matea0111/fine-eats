@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+    <h1 class="text-center">Edit restaurant</h1>
+    <div class="col-6 offset-3">
+        <form action="/restaurants/<%=restaurant._id%>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title"> Title</label>
+                <input class="form-control" type="text" id="title" name="restaurant[title]" 
+                value="<%= restaurant.title %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a title.
+                  </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location"> Location</label>
+                <input class="form-control" type="text" id="location" name="restaurant[location]"
+                 value="<%= restaurant.location%>" required>
+                 <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provde a valid location.
+                  </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Add Images</label>
+                <input type="file" name="image" id="image" multiple>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="price">Restaurant price</label>
+                <input type="range" class="form-range" min="1" max="5" step="1" id="price" name="restaurant[price]" required 
+                value="<%= restaurant.price%>">
+                <div style="display:flex; flex-direction:row; justify-content:space-between;">
+                    <div>
+                        <label for="smallprice">$</label>
+                    </div>
+                    <div>
+                        <label for="midprice">$$$</label>
+                    </div>
+                    <div>
+                        <label for="bigprice">$$$$$</label>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="restaurant[description]"><%=restaurant.description%>  </textarea>
+            </div>
+
+            <div class style="display:flex; flex-direction:row; justify-content:space-between;"> <button class="btn btn-dark ">UPDATE RESTAURANT</button>
+                <a href="/restaurants/<%= restaurant._id%>">Back to the restaurant</a> 
+            </div>
+        </form>
+        
+             
+    </div>
+</div>

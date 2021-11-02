@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+    <div class="col-6 ">
+        <div class="card mb-3">
+            <h5 class="card-title mt-3 mb-3">
+                <%= user.firstName + " " + user.lastName %>
+            </h5>
+            <img src="<%= user.avatar %>" img class="card-img-top" alt="...">
+            <div class="card-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores neque porro
+                laboriosam aperiam rerum, ea cumque excepturi ipsam officia iure tempora, et commodi perspiciatis. Saepe
+                nobis architecto illo a quibusdam.
+            </div>
+            <form action="/users/<%=user._id%>?_method=DELETE" method="POST"></form>
+            <button class="btn btn-outline-danger">Delete</button> </form>
+        </div>
+    </div>
+<div class="col-6 ">
+    <div class="card mb-3 ">
+        <div class=" card-body">
+          <h5 class="card-title"><%= user.username %>'s restaurants:</h5>
+          <p class="card-text">
+              <% for (let restaurant of restaurants) { %>
+                <li><a href="/restaurants/<%= restaurant.id %>"><%= restaurant.title %></a></li>
+            <% } %></p>
+            
+    
+    </div>
+</div>
+      
