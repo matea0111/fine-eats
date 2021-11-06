@@ -5,12 +5,13 @@
     <div>
             <div class="mb-3">
                 <label class="form-label"  for="category">Category</label>
-                <input type="hidden" id="category" value="all" name="category" required> 
-                <select  onchange="myFunction(this.value)">
+                <select  onchange="filterCategory(this.value)">
                     <% for (const i in categoryList) { %>
                         <option value="<%= categoryList[i].name%>"> <%= categoryList[i].name %> </option>
                     <% } %>
                 </select>
+                <input type="text" name="name" id="nameinput" placeholder="Search by restaurant name" onfocusout="filterName(this.value)">
+                <a href="/restaurants" class="btn btn-outline-success" >Clear filter</a>
             </div>
     </div>
 
@@ -51,8 +52,10 @@
  <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src = "/JSs/paginate.js"></script>
  <script>
-    function myFunction(val) {
-      document.getElementById('category').value=val;
+    function filterCategory(val) {
       window.location.replace('/restaurants?category='.concat(val));
+    }
+    function filterName(val) {
+      window.location.replace('/restaurants?name='.concat(val));
     }
 </script>

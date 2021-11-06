@@ -10,10 +10,10 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken});
 module.exports.index = async (req, res) => {
     const { category, name, page } = req.query;
     var categoryCondition = category ? { category } : {};
-    var nameCondition = name ? { name } : {};
-
+    var nameCondition = name ? { title: /.*name.*/ } : {};
+    console.log(nameCondition, Restaurant.find(nameCondition));
     if(!req.query.page){
-       const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
+       const restaurants = await Restaurant.paginate(categoryCondition,nameCondition, {
         populate: {
             path: 'popupText'
         }
@@ -22,7 +22,7 @@ module.exports.index = async (req, res) => {
     res.render('restaurants/index', {restaurants,categoryList})
     } else {
         const {page}= req.query;
-        const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
+        const restaurants = await Restaurant.paginate(categoryCondition,nameCondition, {
             page,
             populate: {
                 path: 'popupText'
