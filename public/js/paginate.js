@@ -2,6 +2,7 @@ const paginate=document.getElementById('paginate');
 const $restaurantsContainer=$('#restaurants-container');
 paginate.addEventListener('click', function (e) {
     e.preventDefault();
+    console.log(this.href);
     fetch(this.href)
     .then(response => response.json())
     .then(data => {
@@ -10,9 +11,14 @@ paginate.addEventListener('click', function (e) {
             $restaurantsContainer.append(template);
         }
         let {nextPage}=data;
-        this.href = this.href.replace(/page=\d+/, `page=${nextPage}`);
         restaurants.features.push(...data.docs);
         map.getSource('restaurants').setData(restaurants);
+        if (nextPage) {
+            this.href = this.href.replace(/page=\d+/, `page=${nextPage}`);
+        } else {
+            // No more pages to load, remove the View More button
+            this.remove();
+        }
     })
     .catch(err => console.log("ERORR",err));
 

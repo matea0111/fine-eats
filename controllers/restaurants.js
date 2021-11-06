@@ -1,5 +1,5 @@
 const Restaurant = require('../models/restaurant');
-const categories = require('../models/category');
+const Category = require('../models/category');
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken}); 
@@ -13,16 +13,16 @@ module.exports.index = async (req, res) => {
     var nameCondition = name ? { name } : {};
 
     if(!req.query.page){
-       const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
-        populate: {
-            path: 'popupText'
-        }
-    });
-    const categoryList = await categories.find({}); 
-    res.render('restaurants/index', {restaurants,categoryList})
+        const restaurants = await Restaurant.paginate(categoryCondition, {
+            populate: {
+                path: 'popupText'
+            }
+        });
+        const categoryList = await Category.find({}); 
+        res.render('restaurants/index', {restaurants,categoryList})
     } else {
         const {page}= req.query;
-        const restaurants = await Restaurant.paginate(categoryCondition, nameCondition, {
+        const restaurants = await Restaurant.paginate(categoryCondition, {
             page,
             populate: {
                 path: 'popupText'
@@ -34,7 +34,7 @@ module.exports.index = async (req, res) => {
 
 module.exports.AddNewForm = async(req, res) => {
     const restaurantList = await Restaurant.find();
-    const categoryList = await categories.find({}); 
+    const categoryList = await Category.find({}); 
     restaurantList.forEach(()=>{
 
     })
@@ -68,7 +68,7 @@ module.exports.restaurantInfo = async (req,res) => {
         res.redirect('/restaurants');
     }
 
-    const categoryList = await categories.find({});
+    const categoryList = await Category.find({});
     res.render('restaurants/show', {restaurant, categories});
 }
 
