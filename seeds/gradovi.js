@@ -1,4 +1,14 @@
-module.exports=[
+const mongoose = require('mongoose');
+const city = require('../models/city');
+
+mongoose.connect('mongodb://localhost:27017/fine-eats', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+});
+
+
+const cities=[
     {
         city: "Zagreb", 
         lat: "45.8000", 
@@ -6105,3 +6115,30 @@ module.exports=[
         population_proper: ""
     }
 ]
+
+module.exports=cities;
+
+const seedDB= async() => {
+    await city.deleteMany({});
+
+    for(const i in cities){
+        
+    const c = new city(
+        {
+         city : cities[i].city,
+         lat : cities[i].lat,
+         lng : cities[i].lng,
+         country : cities[i].country,
+         iso2 : cities[i].iso2,
+         admin_name : cities[i].admin_name,
+         capital : cities[i].capital,
+         population  : cities[i].population,
+         population_proper : cities[i].population_proper 
+        })
+    await c.save()
+    }
+}
+
+seedDB().then(() => {
+    mongoose.connection.close();
+})
