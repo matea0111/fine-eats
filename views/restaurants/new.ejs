@@ -25,7 +25,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label"  for="category">Category</label>
-                    <input class="form-control" type="hidden" id="category" value="<%=categoryList[0]._id%>" name="category" required> 
+                    <input class="form-control" type="hidden" id="category" value="<%=categoryList[0]._id%>" name="restaurant[category]" required> 
                     <select  onchange="myFunction(this.value)">
                         <% for (const i in categoryList) { %>
                             <option value="<%= categoryList[i]._id %>"> <%= categoryList[i].name %> </option>

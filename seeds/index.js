@@ -21,7 +21,7 @@ db.once("open", () => {
 
 const sample = array => array[Math.floor(Math.random() * array.length)];
 const seedDB= async() => {
-    const categoryList = await categories.find({}).select('name -_id');
+    const categoryList = await Category.find({}).select('name -_id');
     await Restaurant.deleteMany({});
     for(let i = 0 ; i < 15 ; i++){
         const rand100 = Math.floor(Math.random() * 100);

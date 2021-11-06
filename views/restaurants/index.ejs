@@ -36,9 +36,11 @@
 
 <% } %> 
 </div>
+<% if (restaurants.nextPage) { %>
 <div class="text-center mb-5">
     <a href="/restaurants?page=<%= restaurants.nextPage  %> " id="paginate" class="btn btn-primary"> View more</a>
 </div>
+<% } %>
 
 
 
@@ -48,9 +50,9 @@
 
 </script>
 
- <script src = "/JSs/clusterMap.js"></script> 
+ <script src = "/js//clusterMap.js"></script> 
  <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script src = "/JSs/paginate.js"></script>
+ <script src = "/js//paginate.js"></script>
  <script>
     function filterCategory(val) {
       window.location.replace('/restaurants?category='.concat(val));
