@@ -14,7 +14,7 @@ paginate.addEventListener('click', function (e) {
         restaurants.features.push(...data.docs);
         map.getSource('restaurants').setData(restaurants);
         if (nextPage) {
-            this.href = this.href.replace(/page=\d+/, `page=${nextPage}`);
+            this.href = this.href.replace(/page=\d+/,`page=${nextPage}`);
         } else {
             // No more pages to load, remove the View More button
             this.remove();

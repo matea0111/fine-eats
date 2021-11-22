@@ -10,7 +10,8 @@ module.exports.restaurantSchema = Joi.object({
         price: Joi.string().required().min(1),
         //image: Joi.string().required(),
         description: Joi.string().allow(''),
-    }).required()
+    }).required(),
+    deleteImages:Joi.array()
 });
 
 module.exports.reviewSchema = Joi.object({

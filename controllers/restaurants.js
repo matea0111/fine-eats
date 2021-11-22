@@ -3,15 +3,15 @@ const Category = require('../models/category');
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken}); 
-
+const {cloudinary} = require("../cloudinary"); 
 
 
 
 module.exports.index = async (req, res) => {
     const { category, name, page } = req.query;
+    var restaurantsAll= await Restaurant.find({});
     var categoryCondition = category ? { category } : {};
     var nameCondition = name ? {title: { $regex: new RegExp(name), $options: "i"  }} : {};
-    console.log(nameCondition, Restaurant.find(nameCondition));
     if(!req.query.page){
         const restaurants = await Restaurant.paginate(nameCondition, {
             populate: {
@@ -19,7 +19,8 @@ module.exports.index = async (req, res) => {
             }
         });
         const categoryList = await Category.find({}); 
-        res.render('restaurants/index', {restaurants,categoryList})
+        
+        res.render('restaurants/index', {restaurants,categoryList,restaurantsAll});
     } else {
         const {page}= req.query;
         const restaurants = await Restaurant.paginate(nameCondition, {
@@ -46,7 +47,6 @@ module.exports.createRestaurant = async (req,res,next) => {
         query: req.body.restaurant.location,
         limit:1
     }).send()
-    console.log(req.body.restaurant)
     const restaurant = new Restaurant(req.body.restaurant);
     restaurant.images=req.files.map(f => ({url: f.path, filename: f.filename}));
 
@@ -88,7 +88,13 @@ module.exports.updateRestaurant = async (req,res) => {
     const restaurant= await Restaurant.findByIdAndUpdate(id, {...req.body.restaurant});
     const imgs =req.files.map(f => ({url: f.path, filename: f.filename}));
     restaurant.images.push(...imgs);
-    await restaurant.save()
+    await restaurant.save();
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        await restaurant.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
+    }
     req.flash('success', 'You successfully updated restaurant info');
     res.redirect(`/restaurants/${restaurant._id}`)
 }

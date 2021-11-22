@@ -9,6 +9,7 @@ const UserSchema = new Schema({
         unique: true
     },
     avatar: String,
+
     firstName: String,
     lastName: String,
     isAdmin:{

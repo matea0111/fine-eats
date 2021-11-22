@@ -1,11 +1,13 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/CSS/images.css" class="rel">
     <div class="row">
         <h1 class="text-center">Add a new restaurant</h1>
         <div class="col-6 offset-3">
             <form action="/restaurants" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+                
                 <div class="mb-3">
                     <label class="form-label" for="title"> Title</label>
-                    <input class="form-control" type="text" id="title" name="restaurant[title]" required>
+                    <input class="form-control" type="text" id="title" name="restaurant[title]" placeholder="Restaurant title" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -13,6 +15,7 @@
                         Please choose a title.
                     </div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="location"> Location</label>
                     <input class="form-control" type="text" id="location" name="restaurant[location]" required>
@@ -23,36 +26,27 @@
                         Please provide a valid location.
                     </div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label"  for="category">Category</label>
-                    <input class="form-control" type="hidden" id="category" value="<%=categoryList[0]._id%>" name="restaurant[category]" required> 
+                    <input class="form-control" type="hidden" id="category" value="<%=categoryList[0].name%>" name="restaurant[category]" required> 
                     <select  onchange="myFunction(this.value)">
                         <% for (const i in categoryList) { %>
-                            <option value="<%= categoryList[i]._id %>"> <%= categoryList[i].name %> </option>
+                            <option value="<%= categoryList[i].name %>"> <%= categoryList[i].name %> </option>
                         <% } %>
                     </select>
                 </div>
-                </div>
-                <div>
-                <input type="file" name="image" id="" multiple required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div class="invalid-feedback">
-                    Please choose images.
-                </div>
-            </div>
-                <!-- <div class="mb-3">
-                    <label class="form-label" for="image">Image Url</label>
-                    <input class="form-control" type="text" id="image" name="restaurant[image]" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please insert photo url.
-                    </div>
-                </div> -->
 
+                <div class="mb-3">
+                    <label class="form-label">Choose Image(s)</label>
+                    <div class="form-file custom-file">
+                        <input class="form-control custom-file-input" type="file" id="image" name="image" multiple
+                            onchange="previewMultiple(event)">
+                        <label for="image" class="form-label custom-file-label"></label>
+                    </div>
+                    <div id="formFile"></div>
+                </div>
+               
                 <div class="mb-3">
                     <label class="form-label" for="price">Restaurant price</label>
                     <input type="range" class="form-range" min="1" max="5" step="1" id="price" name="restaurant[price]"
@@ -72,14 +66,15 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" type="text" id="description"
-                        name="restaurant[description]"></textarea>
+                    <textarea class="form-control" type="text" id="description" placeholder="Restaurant description" name="restaurant[description]"></textarea>
                 </div>
 
-                <div class="mb-3"> <button class="btn btn-dark">ADD RESTAURANT</button>
+                <div class="mb-3"> 
+                    <button class="btn btn-dark btn-lg">ADD RESTAURANT</button>
+                    <a href="/restaurants"class="btn btn-outline-dark"> Go back to all restaurants</a> 
                 </div>
             </form>
-            <a href="/restaurants">All Restaurants</a>
+            
         </div>
     </div>
 
@@ -88,3 +83,14 @@
           document.getElementById('category').value=val;
         }
     </script>
+    <script>
+        function activatePlacesSearch()
+{
+    var input = document.getElementById('location');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
+    </script>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuq5_fuaojsoeTmNUqSOiU6uXd8WM_n7g&libraries=places&callback=activatePlacesSearch">
+</script>

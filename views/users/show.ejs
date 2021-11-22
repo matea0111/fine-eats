@@ -1,30 +1,97 @@
 <% layout('layouts/boilerplate')%>
-
-<div class="row">
-    <div class="col-6 ">
-        <div class="card mb-3">
-            <h5 class="card-title mt-3 mb-3">
-                <%= user.firstName + " " + user.lastName %>
-            </h5>
-            <img src="<%= user.avatar %>" img class="card-img-top" alt="...">
-            <div class="card-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores neque porro
-                laboriosam aperiam rerum, ea cumque excepturi ipsam officia iure tempora, et commodi perspiciatis. Saepe
-                nobis architecto illo a quibusdam.
+       <div class="row py-5 px-4">
+        <div>
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 cover">
+                    <div class="media align-items-end profile-head">
+                        <div class="profile-picture mr-3"><img src="<%= user.avatar %>" alt="User avatar" width="130" class="rounded mb-2 img-thumbnail"></div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0" style=" display: inline-block;"><%=user.firstName + " " + user.lastName %></h4> 
+                            <% if (currentUser && currentUser.isAdmin) {%> 
+                                <a href="/users/<%=currentUser._id %>/edit" class="btn btn-outline-light btn-sm btn-block" style=" display: inline-block; margin-left: 1em;">Edit profile</a>
+                            <% } %> 
+                        </div>
+                            <div class="counter p-4 justify-content-end text-center ">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <h5 class="font-weight-bold mb-0 d-block"><%= restaurantCount %> </h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Restaurants added</small>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <h5 class="font-weight-bold mb-0 d-block"><%=reviewsCount %> </h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Reviews left</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-4 px-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <button onclick="toggleRestaurants()" class="btn btn-outline-secondary">Show restaurants</button>
+                        <button onclick="toggleReviews()" class="btn btn-outline-secondary">Show reviews</button>
+                    </div>
+                    <div class="row" id="allRestaurants" style="display: none;">
+                        <% for (let restaurant of restaurants) { %>
+                            <a href="/restaurants/<%= restaurant._id%>" class="col-3 stretched-link">
+                            <div class="restaurant-card ">
+                              <div class="image">
+                                <img src="<%=restaurant.images[0].url%>" />
+                              </div>
+                              <div class="restaurant-card-inner">
+                                <div class="header">
+                                  <h2>
+                                      
+                                    <%=restaurant.title %>
+                                
+                            </h2>
+                              </div>
+                              <div class="content">
+                                <p><%= restaurant.description %></p>
+                              </div>
+                            </div>
+                            </div> 
+                        </a>                         
+                          <% } %> 
+                    </div>
+                    
+                </div>
+                <div class="row" id="allReviews" style="display: none;">
+                <% for (let review of reviews) { %>
+                    <div class=" ratings d-flex justify-content-center col-sm-3 ">
+                        <div class="text-center">
+                            <div class="">
+                                <div>
+                                    <%= review.body %>
+                                </div>
+                                 <div>
+                                     <%= review.rating %> / 5
+                                 </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
             </div>
-            <form action="/users/<%=user._id%>?_method=DELETE" method="POST"></form>
-            <button class="btn btn-outline-danger">Delete</button> </form>
+            </div>
         </div>
     </div>
-<div class="col-6 ">
-    <div class="card mb-3 ">
-        <div class=" card-body">
-          <h5 class="card-title"><%= user.username %>'s restaurants:</h5>
-          <p class="card-text">
-              <% for (let restaurant of restaurants) { %>
-                <li><a href="/restaurants/<%= restaurant.id %>"><%= restaurant.title %></a></li>
-            <% } %></p>
-            
-    
-    </div>
-</div>
-      
+
+<script>
+    function toggleRestaurants() {
+        var x = document.getElementById("allRestaurants");
+        if (x.style.display === "none") {
+            x.style.display = "";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+function toggleReviews() {
+    var x = document.getElementById("allReviews");
+    if (x.style.display === "none") {
+        x.style.display = "";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>

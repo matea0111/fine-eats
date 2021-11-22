@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate')%>
 
 <h1>REGISTER</h1>
-<form action="/register" method="POST" class="needs-validation" novalidate>
+<form action="/register" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
     <div class="mb-3">
         <label class="form-label" for="username"> Username</label>
         <input class="form-control" type="text" id="username" name="username" required>
@@ -28,7 +28,7 @@
         </div>
     <div class="mb-3">
         <label class="form-label" for="avatar">Avatar Url:</label>
-        <input class="form-control" type="text" id="avatar" name="avatar" required>
+        <input class="form-control" type="file" id="avatar" name="avatar" required>
         <div class="valid-feedback">
             Looks good!
         </div>

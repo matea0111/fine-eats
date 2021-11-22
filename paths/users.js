@@ -5,12 +5,14 @@ const wrapAsync=require('../helpers/wrapAsync');
 const User = require('../models/user');
 const users = require('../controllers/users');
 const Restaurant = require('../models/restaurant');
-const {checkProfileOwnership} =  require('../middleware');
-
+const {isLoggedIn,checkProfileOwnership} =  require('../middleware');
+const multer =require('multer');
+const {storage} = require('../cloudinary');
+const upload = multer({storage});
 
 router.route('/register')
     .get(users.showRegister)
-    .post(wrapAsync(users.userRegistration))
+    .post(upload.single('avatar'),wrapAsync(users.userRegistration))
 
 router.route('/login')
     .get(users.showLogin)
@@ -20,20 +22,17 @@ router.get('/logout', (users.logout))
 module.exports = router;
 
 //user profiles
-router.get("/users/:id", (req, res) => {
-  User.findById(req.params.id, function(err, foundUser) {
-    if(err) {
-      req.flash("error", "Something went wrong.");
-      return res.redirect("/");
-    }
-    Restaurant.find().where('author').equals(foundUser._id).exec(function(err, restaurants) {
-      if(err) {
-        req.flash("error", "Something went wrong.");
-        return res.redirect("/");
-      }
-      res.render("users/show", {user: foundUser, restaurants: restaurants});
-    })
-  });
-});
+router.route("/users/:id")
+    .get(users.showProfile);
 
+router.route("/users/:id/edit")
+    .get(isLoggedIn, checkProfileOwnership,function(req, res) {
+        User.findById(req.params.id, function(err, foundUser){
+        if(err){
+            console.log(err)
+        } else {
+            res.render("users/edit", {user: foundUser});
+        }
+    });
+})
 

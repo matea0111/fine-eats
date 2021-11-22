@@ -1,4 +1,8 @@
 const User = require('../models/user');
+const {cloudinary} = require("../cloudinary"); 
+const Restaurant = require('../models/restaurant');
+const Review = require('../models/review');
+
 
 module.exports.showRegister= (req, res) => {
     return res.render('users/register');
@@ -11,8 +15,8 @@ module.exports.userRegistration = async(req, res,next ) => {
         username:req.body.username,
         firstName:req.body.firstName,
         lastName:req.body.lastName,
-        avatar:req.body.avatar,
-        email:req.body.email
+        avatar: req.file.path,
+        email:req.body.email,
     });
     if(req.body.adminCode === 'admincode123'){
         user.isAdmin = true;
@@ -27,7 +31,6 @@ module.exports.userRegistration = async(req, res,next ) => {
         req.flash('error',e.message);
         return res.redirect('register');
     }
-    console.log(registeredUser);
     
 }
 
@@ -43,6 +46,29 @@ module.exports.Login = (req, res) => {
 
 }
 
+
+module.exports.showProfile= async(req, res) => {
+    User.findById(req.params.id, function(err, foundUser) {
+      if(err) {
+        req.flash("error", "Something went wrong.");
+        return res.redirect("/");
+      }
+      Restaurant.find().where('author').equals(foundUser._id).exec(function(err, restaurants) {
+        if(err) {
+          req.flash("error", "Something went wrong.");
+          return res.redirect("/");
+        }
+        Review.find().where('author').equals(foundUser._id).exec(function(err, reviews) {
+            if(err) {
+              req.flash("error", "Something went wrong.");
+              return res.redirect("/");
+            }
+        res.render("users/show", {user: foundUser, restaurants: restaurants, restaurantCount: restaurants.length, reviews: reviews, reviewsCount: reviews.length});
+      });
+    }); 
+  });
+}
+
 //logout route
 module.exports.logout=(req,res) =>{
     req.logout();
@@ -50,3 +76,10 @@ module.exports.logout=(req,res) =>{
     return res.redirect('/restaurants');
 }
 
+
+module.exports.deleteUser = async (req,res) => {
+    const {id} = req.params;
+    await User.findByIdAndDelete(id);
+    req.flash('success', 'You successfully deleted a User');
+    return res.redirect('/restaurants')
+}
