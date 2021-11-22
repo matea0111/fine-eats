@@ -18,3 +18,6 @@ new mapboxgl.Marker({
     )
 )
     .addTo(map);
+
+
+map.setData(restaurant.geometry.coordinates);

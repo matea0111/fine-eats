@@ -18,6 +18,8 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
 
+
+
 const userRoutes = require('./paths/users');
 const restaurantRoutes = require('./paths/restaurants');
 const reviewRoutes= require('./paths/reviews');
@@ -86,6 +88,7 @@ const scriptSrcUrls = [
 app.use('/', userRoutes)
 app.use('/restaurants', restaurantRoutes)
 app.use('/restaurants/:id/reviews', reviewRoutes)
+
 
 app.get('/', (req, res) => {
     res.render('home')

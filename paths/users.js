@@ -19,20 +19,31 @@ router.route('/login')
     .post(passport.authenticate('local',{failureFlash:true, failureRedirect: '/login'}),(users.Login))
 
 router.get('/logout', (users.logout))
-module.exports = router;
 
 //user profiles
 router.route("/users/:id")
-    .get(users.showProfile);
+.get(users.showProfile);
 
 router.route("/users/:id/edit")
-    .get(isLoggedIn, checkProfileOwnership,function(req, res) {
-        User.findById(req.params.id, function(err, foundUser){
+.get(isLoggedIn, checkProfileOwnership,function(req, res) {
+    User.findById(req.params.id, function(err, foundUser){
         if(err){
             console.log(err)
         } else {
             res.render("users/edit", {user: foundUser});
         }
     });
-})
+});
+
+router.route("/manage")
+.get(users.manage)
+
+router.route('/toggleadmin')
+.post(users.toggleAdmin)
+
+router.route('/delete')
+.post(users.deleteUser)
+
+
+module.exports = router;
 

@@ -81,5 +81,19 @@ module.exports.deleteUser = async (req,res) => {
     const {id} = req.params;
     await User.findByIdAndDelete(id);
     req.flash('success', 'You successfully deleted a User');
-    return res.redirect('/restaurants')
+    return res.redirect('/users/usermanagment')
+}
+
+module.exports.manage = async(req, res) => {
+    const users = await User.find({});  
+    res.render('users/usermanagment', {users: users});
+}
+
+
+module.exports.toggleAdmin = async (req,res) => {
+    console.log(req.params);
+    const {id} = req.params;
+    let user = await User.findById(id);
+    user.isAdmin =!user.isAdmin;
+    await user.save();
 }
