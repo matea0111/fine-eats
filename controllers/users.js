@@ -2,6 +2,8 @@ const User = require('../models/user');
 const {cloudinary} = require("../cloudinary"); 
 const Restaurant = require('../models/restaurant');
 const Review = require('../models/review');
+const { each } = require('jquery');
+const restaurant = require('../models/restaurant');
 
 
 module.exports.showRegister= (req, res) => {
@@ -73,6 +75,11 @@ module.exports.deleteUser = async (req,res) => {
         req.flash('error', 'you cannot delete yourself!');
         return res.redirect('back');
     }
+    let restaurants= await Restaurant.find().where('author').equals(id);
+    restaurants.forEach ( async restaurant => {
+        restaurant.author= req.user;
+        await restaurant.save();
+      });
     await User.findByIdAndDelete(id);
     req.flash('success', 'You successfully deleted a User');
     return res.redirect('back')
