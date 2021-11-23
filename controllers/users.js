@@ -45,7 +45,6 @@ module.exports.Login = (req, res) => {
     const redirectUrl= req.session.returnTo || '/restaurants';
     delete req.session.returnTo;
      res.redirect(redirectUrl);
-
 }
 
 
@@ -97,11 +96,13 @@ module.exports.showProfile= async(req, res) => {
           req.flash("error", "Something went wrong.");
           return res.redirect("/");
         }
-        Review.find().where('author').equals(foundUser._id).exec(function(err, reviews) {
+        Review.find().where('author').equals(foundUser._id).populate('restaurant').exec(function(err, reviews) {
             if(err) {
               req.flash("error", "Something went wrong.");
               return res.redirect("/");
             }
+            
+
         res.render("users/show", {user: foundUser, restaurants: restaurants, restaurantCount: restaurants.length, reviews: reviews, reviewsCount: reviews.length});
       });
     }); 

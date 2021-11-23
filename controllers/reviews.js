@@ -4,6 +4,7 @@ const Review= require('../models/review');
 module.exports.addReview=async(req, res) => {
     const restaurant = await Restaurant.findById(req.params.id);
     const review = new Review(req.body.review);
+    review.restaurant=restaurant;
     review.author=req.user._id;
     restaurant.reviews.push(review);
     await review.save();

@@ -253,3 +253,11 @@
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;
   }
+
+
+
+
+  .review{
+    margin-top:1em;
+    max-width: 80%;
+  }

@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/css/starrating.css">
 
 
 <script>
@@ -117,7 +118,7 @@
       </form>
       <% } %> 
       <%for(let review of restaurant.reviews) {%>
-        <div class="card mb-3">
+        <div class="card mb-3 review">
           <div class=" card-body">
             <h5 class="card-title"><%=review.author.username %></h5>
             <p class="card-text"><%= review.body %></p>
