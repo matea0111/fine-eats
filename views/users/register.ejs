@@ -1,6 +1,7 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/CSS/registerform.css">
 
-<h1>REGISTER</h1>
+<h1 class="text-uppercase text-center mb-5">CREATE AN ACCOUNT!</h1>
 <form action="/register" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
     <div class="mb-3">
         <label class="form-label" for="username"> Username</label>
@@ -39,11 +40,11 @@
         <div class="valid-feedback">
             Looks good!
         </div>
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <label class="form-label" for="adminCode"> Admin Code</label>
         <input class="form-control" type="text" id="adminCode" name="adminCode" placeholder="Admin code" >
         <div class="valid-feedback">
             Looks good!
-        </div>    
+        </div>  -->   
     <button class="btn btn-dark mt-3">Register</button>
 </form>

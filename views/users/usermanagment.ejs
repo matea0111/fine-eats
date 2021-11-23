@@ -14,20 +14,22 @@
       <tr>
         <th scope="row"><%= users[user].username%></th>
         <td><%= users[user].email%></td>
-        <td><%= users[user].isAdmin%>
+        <td>
             <div class="form-check form-switch">
-             <form action="/toggleadmin">
+             <form  action="/toggleAdmin"  method="POST">
             <input class="form-check-input" type="checkbox" id="isAdmin" onChange="this.form.submit()"
             <% if (users[user].isAdmin) {%> 
              checked
              <% } %>
             value= <%=users[user]._id %>  > 
+            <input type="hidden"  value=<%=users[user]._id %> id="id"  name="id">
             </form>
-            <label class="form-check-label" for="isAdmin" checked=>Default switch checkbox input</label>
+            <label class="form-check-label" for="isAdmin" checked=></label>
             </div></td>
         <td> 
-            <form action="/delete">
-                <button type="submit" value=<%=users[user]._id %> id="id" name="id" >DELETE USER</button>
+          
+            <form action="/deleteuser"  method="POST">
+                <button type="submit" value=<%=users[user]._id %> id="id" name="id" class="btn btn-outline-primary">DELETE USER</button>
             </form>
         </td>
       </tr>

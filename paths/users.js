@@ -18,8 +18,19 @@ router.route('/login')
     .get(users.showLogin)
     .post(passport.authenticate('local',{failureFlash:true, failureRedirect: '/login'}),(users.Login))
 
-router.get('/logout', (users.logout))
 
+
+
+router.route("/manage")
+.get(isLoggedIn, users.manage)
+
+router.route('/toggleAdmin')
+.post(isLoggedIn, users.toggleAdmin)
+
+router.route('/deleteuser')
+.post(isLoggedIn ,users.deleteUser)
+
+router.get('/logout', (users.logout))
 //user profiles
 router.route("/users/:id")
 .get(users.showProfile);
@@ -35,14 +46,7 @@ router.route("/users/:id/edit")
     });
 });
 
-router.route("/manage")
-.get(users.manage)
 
-router.route('/toggleadmin')
-.post(users.toggleAdmin)
-
-router.route('/delete')
-.post(users.deleteUser)
 
 
 module.exports = router;
