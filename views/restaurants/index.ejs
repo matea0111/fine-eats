@@ -12,6 +12,11 @@
                     <% } %>
                 </select>
                 <input type="text" name="name" id="nameinput" placeholder="Search by restaurant name" onfocusout="filterName(this.value)">
+                <select  onchange="filterRating(this.value)">
+                   <%  for (let i = 1; i <= 5; i++) { %>
+                      <option value="<%= i %>"> <%= i + " or more" %> </option>   
+                    <% } %>
+                </select>
                 <a href="/restaurants" class="btn btn-outline-success" >Clear filter</a>
             </div>
     </div>
@@ -28,6 +33,9 @@
                     <p class="card-text"><%= restaurant.description %></p>
                     <p class="card-text">
                         <small class="text-muted"><%= restaurant.location %></small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted"><%= restaurant.averageRating %></small>
                     </p>
                     <a class="btn btn-outline-success" href="/restaurants/<%= restaurant._id%>"> View <%= restaurant.title%></a>
                 </div>
@@ -62,4 +70,8 @@
     function filterName(val) {
       window.location.replace('/restaurants?name='.concat(val));
     }
+    function filterRating(val) {
+      window.location.replace('/restaurants?rating='.concat(val));
+    }
+
 </script>

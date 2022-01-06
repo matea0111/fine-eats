@@ -4,16 +4,21 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken}); 
 const {cloudinary} = require("../cloudinary"); 
+const restaurant = require('../models/restaurant');
+const _ = require('lodash');
+
 
 
 
 module.exports.index = async (req, res) => {
-    const { category, name, page } = req.query;
+    const { category, name, rating, page } = req.query;
     var restaurantsAll= await Restaurant.find({});
     var categoryCondition = category ? { category } : {};
+    var restaurantRating = rating ? { averageRating: {$gt: rating} } : {};
     var nameCondition = name ? {title: { $regex: new RegExp(name), $options: "i"  }} : {};
+    var filter = !_.isEmpty(categoryCondition) ? categoryCondition : !_.isEmpty ( nameCondition) ? nameCondition : !_.isEmpty( restaurantRating) ? restaurantRating : {};
     if(!req.query.page){
-        const restaurants = await Restaurant.paginate(nameCondition, {
+        const restaurants = await Restaurant.paginate(filter, {
             populate: {
                 path: 'popupText'
             }
@@ -23,7 +28,7 @@ module.exports.index = async (req, res) => {
         res.render('restaurants/index', {restaurants,categoryList,restaurantsAll});
     } else {
         const {page}= req.query;
-        const restaurants = await Restaurant.paginate(nameCondition, {
+        const restaurants = await Restaurant.paginate(filter, {
             page,
             populate: {
                 path: 'popupText'
@@ -64,6 +69,7 @@ module.exports.restaurantInfo = async (req,res) => {
             path:'author'
             }
         }).populate('author');
+        console.log(restaurant);
     if(!restaurant){
         req.flash('error','Cannot find that restaurant');
         res.redirect('/restaurants');

@@ -1,27 +1,26 @@
-const paginate=document.getElementById('paginate');
-const $restaurantsContainer=$('#restaurants-container');
+const paginate = document.getElementById('paginate');
+const $restaurantsContainer = $('#restaurants-container');
 paginate.addEventListener('click', function (e) {
+    console.log(this);
     e.preventDefault();
-    console.log(this.href);
     fetch(this.href)
-    .then(response => response.json())
-    .then(data => {
-        for(const restaurants of data.docs) {
-            let template = generateRestaurant(restaurants);
-            $restaurantsContainer.append(template);
-        }
-        let {nextPage}=data;
-        restaurants.features.push(...data.docs);
-        map.getSource('restaurants').setData(restaurants);
-        if (nextPage) {
-            this.href = this.href.replace(/page=\d+/,`page=${nextPage}`);
-        } else {
-            // No more pages to load, remove the View More button
-            this.remove();
-        }
-    })
-    .catch(err => console.log("ERORR",err));
-
+        .then(response => response.json())
+        .then(data => {
+            for (const restaurants of data.docs) {
+                let template = generateRestaurant(restaurants);
+                $restaurantsContainer.append(template);
+            }
+            let { nextPage } = data;
+            restaurants.features.push(...data.docs);
+            map.getSource('restaurants').setData(restaurants);
+            if (nextPage) {
+                this.href = this.href.replace(/page=\d+/, `page=${nextPage}`);
+            } else {
+                // No more pages to load, remove the View More button
+                this.remove();
+            }
+        })
+        .catch(err => console.log("ERORR", err));
 })
 
 function generateRestaurant(restaurant) {

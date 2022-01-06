@@ -27,7 +27,7 @@ module.exports.userRegistration = async(req, res,next ) => {
     req.login(registeredUser,err => {
         if(err) return next(err),
          req.flash('success',"You successfully registered! Welcome to Fine-Eats " + req.body.username);
-    	 return res.redirect('/restaurants');
+    	 return res.redirect('/users/'+ req.user.id);
     })
     } catch(e){
         req.flash('error',e.message);
@@ -67,18 +67,20 @@ module.exports.toggleAdmin = async (req,res) => {
     return res.redirect('back');
 }
 
-
+// da admin ne moze brisati samog sebe
 module.exports.deleteUser = async (req,res) => {
     const id = req.body.id;
     if (id == req.user.id) {
         req.flash('error', 'you cannot delete yourself!');
         return res.redirect('back');
     }
+
+    //kad se izbrise user,da se svi restorani prebace na admina koji ga je izbrisa
     let restaurants= await Restaurant.find().where('author').equals(id);
     restaurants.forEach ( async restaurant => {
         restaurant.author= req.user;
         await restaurant.save();
-      });
+      }); 
     await User.findByIdAndDelete(id);
     req.flash('success', 'You successfully deleted a User');
     return res.redirect('back')

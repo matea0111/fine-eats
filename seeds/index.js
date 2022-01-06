@@ -37,16 +37,16 @@ const seedDB= async() => {
             images: [
                 {
 
-                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/fnbqlamjrmwpgrmyq6ol.jpg',
-                  filename: 'FineEats/fnbqlamjrmwpgrmyq6ol'
+                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/bddzw1rbptmd8xtzjbmp.jpg',
+                  filename: 'FineEats/bddzw1rbptmd8xtzjbmp'
                 },
                 {
-                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/fnbqlamjrmwpgrmyq6ol.jpg',
-                  filename: 'FineEats/fnbqlamjrmwpgrmyq6ol'
+                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/bddzw1rbptmd8xtzjbmp.jpg',
+                  filename: 'FineEats/bddzw1rbptmd8xtzjbmp'
                 },
                 {
-                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/fnbqlamjrmwpgrmyq6ol.jpg',
-                  filename: 'FineEats/fnbqlamjrmwpgrmyq6ol'
+                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/bddzw1rbptmd8xtzjbmp.jpg',
+                  filename: 'FineEats/bddzw1rbptmd8xtzjbmp'
                 }
               ],
             geometry: {
