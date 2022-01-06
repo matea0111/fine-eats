@@ -53,7 +53,22 @@ module.exports.createRestaurant = async (req,res,next) => {
         limit:1
     }).send()
     const restaurant = new Restaurant(req.body.restaurant);
+    console.log(req.files);
     restaurant.images=req.files.map(f => ({url: f.path, filename: f.filename}));
+    if (restaurant.images.length===0) {
+        var nophoto = [
+            {
+              fieldname: 'image',
+              originalname: 'no-foto.jpg',
+              encoding: '7bit',
+              mimetype: 'image/jpeg',
+              path: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1641505912/FineEats/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector_hkz8rc.webp',
+              size: 103978,
+              filename: 'FineEats/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector_hkz8rc.webp'
+            }
+          ];
+          restaurant.images=nophoto.map(f => ({url: f.path, filename: f.filename}));
+    }
 
     restaurant.geometry = geoData.body.features[0].geometry;
     restaurant.author = req.user._id;
@@ -69,7 +84,6 @@ module.exports.restaurantInfo = async (req,res) => {
             path:'author'
             }
         }).populate('author');
-        console.log(restaurant);
     if(!restaurant){
         req.flash('error','Cannot find that restaurant');
         res.redirect('/restaurants');

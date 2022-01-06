@@ -36,6 +36,7 @@ router.route("/users/:id")
 .get(users.showProfile);
 
 router.route("/users/:id/edit")
+.post(isLoggedIn, checkProfileOwnership, users.update)
 .get(isLoggedIn, checkProfileOwnership,function(req, res) {
     User.findById(req.params.id, function(err, foundUser){
         if(err){

@@ -20,7 +20,7 @@ module.exports.userRegistration = async(req, res,next ) => {
         avatar: req.file.path,
         email:req.body.email,
     });
-    if(req.body.adminCode === 'admincode123'){
+    if(req.body.adminCode == 'admincode123'){
         user.isAdmin = true;
     }
     const registeredUser= await User.register(user, password);
@@ -61,7 +61,6 @@ module.exports.toggleAdmin = async (req,res) => {
         return res.redirect('back');
     }
     let user = await User.findById(id);
-    console.log(user);
     user.isAdmin =!user.isAdmin;
     await user.save(); 
     return res.redirect('back');
@@ -119,3 +118,19 @@ module.exports.logout=(req,res) =>{
 }
 
 
+
+module.exports.update= (req, res) => {
+    User.findById(req.params.id, function(err, user) {
+      if(err) {
+        req.flash("error", "Something went wrong.");
+        return res.redirect("/");
+      }
+    
+      user.firstName = req.firstName;
+      user.lastName = req.lastName;
+      user.save();
+      return res.redirect('back')
+
+     
+  });
+}

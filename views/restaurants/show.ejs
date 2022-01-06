@@ -131,8 +131,11 @@
             <p class="starability-result" data-rating="<%=review.rating %>">
                Rated:<%=review.rating%>  stars
             </p>   
-  
-            <% if (currentUser && review.author.equals(currentUser._id ) || currentUser && currentUser.isAdmin) {%> 
+            <% if ((review.author == null ) && (currentUser && currentUser.isAdmin)){%> 
+            <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+              <button class="btn btn-outline-danger">Delete</button>
+          </form>
+          <% } else if ((currentUser && review.author.equals(currentUser._id ) || currentUser && currentUser.isAdmin)) {%> 
             <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
               <button class="btn btn-outline-danger">Delete</button>
           </form>

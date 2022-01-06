@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
 
-<form action="/users/<%=currentUser._id %>/edit?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+<form action="/users/<%=currentUser._id %>/edit" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
     <div class="mb-3">
         <label class="form-label" for="firstName"> First Name:</label>
         <input class="form-control" type="text" id="firstName" name="firstName" required
