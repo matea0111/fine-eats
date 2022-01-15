@@ -64,7 +64,7 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.checkProfileOwnership =  (req, res, next) => {
     //if user is logged in
     if (req.isAuthenticated()) {
-        User.findById(req.params.id, function (err, foundUser) {
+        User.findById(req.user.id, function (err, foundUser) {
             if (err || !foundUser) {
                 req.flash('error', 'Something Went Wrong!');
                 res.redirect('back');

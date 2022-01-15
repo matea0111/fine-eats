@@ -1,4 +1,6 @@
 <% layout('layouts/boilerplate')%>
+
+
        <div class="row py-5 px-4">
         <div>
             <!-- Profile widget -->
@@ -8,17 +10,17 @@
                         <div class="profile-picture mr-3"><img src="<%= user.avatar %>" alt="User avatar" width="130" class="rounded mb-2 img-thumbnail"></div>
                         <div class="media-body mb-5 text-white">
                             <h4 class="mt-0 mb-0" style=" display: inline-block;"><%=user.firstName + " " + user.lastName %></h4> 
-                            <% if (currentUser && currentUser.isAdmin) {%> 
+                            <% if (currentUser.id===user.id || currentUser.isAdmin) {%> 
                                 <a href="/users/<%=currentUser._id %>/edit" class="btn btn-outline-light btn-sm btn-block" style=" display: inline-block; margin-left: 1em;">Edit profile</a>
-                            <% } %> 
-                        </div>
+                            <% } %>                         
+                        </div> 
                             <div class="counter p-4 justify-content-end text-center ">
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item">
-                                        <h5 class="font-weight-bold mb-0 d-block"><%= restaurantCount %> </h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Restaurants added</small>
+                                        <h5 class="font-weight-bold mb-0 d-block" style="color:white"><%= restaurantCount %> </h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Restaurants added</small>
                                     </li>
                                     <li class="list-inline-item">
-                                        <h5 class="font-weight-bold mb-0 d-block"><%=reviewsCount %> </h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Reviews left</small>
+                                        <h5 class="font-weight-bold mb-0 d-block w3-white" style="color:white"><%=reviewsCount %> </h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Reviews left</small>
                                     </li>
                                 </ul>
                             </div>
@@ -27,8 +29,8 @@
                 </div>
                 <div class="py-4 px-4">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <button onclick="toggleRestaurants()" class="btn btn-light">Show restaurants</button>
-                        <button onclick="toggleReviews()" class="btn btn-light">Show reviews</button>
+                        <button onclick="toggleRestaurants()" class="btn btn-outline-dark btn-lg">Show restaurants</button>
+                        <button onclick="toggleReviews()" class="btn btn-outline-dark btn-lg">Show reviews</button>
                     </div>
                     <div class="row" id="allRestaurants" style="display: none;">
                         <% for (let restaurant of restaurants) { %>
@@ -39,11 +41,7 @@
                               </div>
                               <div class="restaurant-card-inner">
                                 <div class="header">
-                                  <h2>
-                                      
-                                    <%=restaurant.title %>
-                                
-                            </h2>
+                                  <h2> <%=restaurant.title %> </h2>
                               </div>
                               <div class="content">
                                 <p><%= restaurant.description %></p>
@@ -52,8 +50,7 @@
                             </div> 
                         </a>                         
                           <% } %> 
-                    </div>
-                    
+                    </div> 
                 </div>
 
                 <div class="row" id="allReviews" style="display: none;">

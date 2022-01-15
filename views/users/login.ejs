@@ -1,18 +1,30 @@
-<% layout('layouts/boilerplate')%>
+<html>
 
-<h1>Login</h1>
-<form action="/login" method="POST" class="needs-validation" novalidate>
-    <div class="mb-3">
-        <label class="form-label" for="username"> Username</label>
-        <input class="form-control" type="text" id="username" name="username" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    <div class="mb-3">
-        <label class="form-label" for="password"> Password</label>
-        <input class="form-control" type="password" id="password" name="password" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-        <button class="btn btn-dark mt-3">Login</button>
-</form>
+<head>
+<% layout('layouts/boilerplate')%>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder"></div>
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+            <h2 class="text-center">Welcome back.</h2>
+            <div class="mb-3">
+                <label class="username" for="username"></label>
+                <input class="form-control" type="text" placeholder="Username" id="username" name="username" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="mb-3">
+                    <label class="password" for="password"></label>
+                    <input class="form-control" type="password" placeholder="Password" id="password" name="password" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>  
+                    <button  class="btn btn-primary btn-block btn-large"type="submit">Log in</button>
+
+        </form>
+    </div>
+</div>	

@@ -14,7 +14,7 @@ module.exports.index = async (req, res) => {
     const { category, name, rating, page } = req.query;
     var restaurantsAll= await Restaurant.find({});
     var categoryCondition = category ? { category } : {};
-    var restaurantRating = rating ? { averageRating: {$gt: rating} } : {};
+    var restaurantRating = rating ? { averageRating: {$gte: rating} } : {};
     var nameCondition = name ? {title: { $regex: new RegExp(name), $options: "i"  }} : {};
     var filter = !_.isEmpty(categoryCondition) ? categoryCondition : !_.isEmpty ( nameCondition) ? nameCondition : !_.isEmpty( restaurantRating) ? restaurantRating : {};
     if(!req.query.page){
@@ -96,11 +96,13 @@ module.exports.restaurantInfo = async (req,res) => {
 module.exports.editForm=async(req,res) => {
     const {id} = req.params;
     const restaurant = await Restaurant.findById(id)
+    const categoryList = await Category.find({}); 
+
     if(!restaurant){
         req.flash('error','Cannot find that restaurant');
         return res.redirect('/restaurants');
     } 
-    res.render('restaurants/edit', {restaurant})
+    res.render('restaurants/edit', {restaurant,categoryList})
 }
 
 module.exports.updateRestaurant = async (req,res) => {

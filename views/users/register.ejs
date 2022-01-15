@@ -1,50 +1,52 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/CSS/registerform.css">
 
-<h1 class="text-uppercase text-center mb-5">CREATE AN ACCOUNT!</h1>
-<form action="/register" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
-    <div class="mb-3">
-        <label class="form-label" for="username"> Username</label>
-        <input class="form-control" type="text" id="username" name="username" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    <div class="mb-3">
-        <label class="form-label" for="email"> E-Mail</label>
-        <input class="form-control" type="email" id="email" name="email" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>  
-    <div class="mb-3">
-        <label class="form-label" for="firstName"> First Name:</label>
-        <input class="form-control" type="text" id="firstName" name="firstName" required>
-        <div class="valid-feedback">
-             Looks good!
-        </div>
-    <div class="mb-3">
-        <label class="form-label" for="lastName"> Last Name:</label>
-        <input class="form-control" type="text" id="lastName" name="lastName" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    <div class="mb-3">
-        <label class="form-label" for="avatar">Avatar Url:</label>
-        <input class="form-control" type="file" id="avatar" name="avatar" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-        
-    <div class="mb-3">
-        <label class="form-label" for="password"> Password</label>
-        <input class="form-control" type="password" id="password" name="password" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-    <!-- <div class="mb-3">
-        <label class="form-label" for="adminCode"> Admin Code</label>
-        <input class="form-control" type="text" id="adminCode" name="adminCode" placeholder="Admin code" >
-        <div class="valid-feedback">
-            Looks good!
-        </div>  -->   
-    <button class="btn btn-dark mt-3">Register</button>
-</form>
+
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder"></div>
+        <form action="/register" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <h2 class="text-center"><strong>Create</strong> an account.</h2>
+            <div class="mb-3">
+                <label class="form-label" for="username"></label>
+                <input class="form-control" type="text" id="username" name="username" required placeholder="Enter your username">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="email"></label>
+                <input class="form-control" type="email" id="email" name="email" required placeholder="Enter your e-mail">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>  
+            <div class="mb-3">
+                <label class="form-label" for="firstName"></label>
+                <input class="form-control" type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+                <div class="valid-feedback">
+                     Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="lastName"></label>
+                <input class="form-control" type="text" id="lastName" name="lastName" required placeholder="Enter your last name">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="password"></label>
+                <input class="form-control" type="password" id="password" name="password" required placeholder="Enter your password">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="avatar"></label>
+                <input class="form-control" type="file" id="avatar" name="avatar" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                
+
+            <button class="btn btn-success btn-block mt-3" type="submit">Sign Up</button></div>
+            <a class="already mt-3" href="/login">You already have an account? Login here.</a>
+        </form>
+    </div>
+</div>				                            

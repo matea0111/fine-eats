@@ -1,9 +1,12 @@
 <% layout('layouts/boilerplate')%>
-<link rel="stylesheet" href="/CSS/images.css" class="rel">
-<div class="row">
-    <h1 class="text-center">Edit restaurant</h1>
-    <div class="edit-form">
+<link rel="stylesheet" href="/CSS/addrestaurant.css">
+
+
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder"></div>
         <form action="/restaurants/<%=restaurant._id%>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+            <h2 class="text-center"><strong>Update</strong> a restaurant.</h2>
             <div class="mb-3">
                 <label class="form-label" for="title"> Title</label>
                 <input class="form-control" type="text" id="title" name="restaurant[title]" 
@@ -15,7 +18,7 @@
                     Please choose a title.
                   </div>
             </div>
-           <div class="mb-3" style="display: none;">
+            <div class="mb-3" style="display: none;">
                 <label class="form-label" for="location"> Location</label>
                 <input class="form-control" type="text" id="location" name="restaurant[location]"
                  value="<%= restaurant.location%>" required>
@@ -26,6 +29,15 @@
                     Please provde a valid location.
                   </div>
             </div> 
+            <div class="mb-3">
+                <label class="form-label"  for="category">Category</label>
+                <input class="form-control" type="hidden" id="category" value="<%=categoryList[0].name%>" name="restaurant[category]" required> 
+                <select  onchange="myFunction(this.value)">
+                    <% for (const i in categoryList) { %>
+                        <option value="<%= categoryList[i].name %>"> <%= categoryList[i].name %> </option>
+                    <% } %>
+                </select>
+            </div>
             
             <div class="mb-3">
                 <label class="form-label">Choose Image(s)</label>
@@ -56,28 +68,35 @@
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="restaurant[description]"><%=restaurant.description%>  </textarea>
+                <textarea class="form-control" style="min-height: 10em;" type="text" id="description" name="restaurant[description]"><%=restaurant.description%>  </textarea>
             </div>
-                    <div class=row style="margin-bottom:1em;">
+                    
+            <div class=row style="margin-bottom:1em;">
                         <div> Delete images? </div>
                     <% restaurant.images.forEach(function(img, i) {  %>
-                    <div class="custom-control custom-checkbox image-checkbox col-3">
+                    <div class="custom-control custom-checkbox image-checkbox col-5">
                         <input type="checkbox" class="custom-control-input"  id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
                         <label class="custom-control-label" for="image-<%=i%>">
                             <img src="<%=img.url %>" alt="#" class="img-fluid">
                         </label>
-                </div>
-                     <% })%>
                     </div>
-            <div class="mb-3"> 
-                <button class="btn btn-dark btn-lg">UPDATE RESTAURANT</button>
-                <a href="/restaurants/<%= restaurant._id%>"class="btn btn-outline-dark"> Back to the restaurant</a> 
+                     <% })%>
             </div>
+                
+                    <div class="mb-3 mt-5"> 
+                        <button class="btn btn-dark ">UPDATE RESTAURANT</button> 
+                        <a href="/restaurants/<%= restaurant._id%>"class="btn btn-outline-dark mt-1"> Back to the restaurant</a> 
+                    </div>
         </form>
-        
-             
     </div>
-</div>
+</div>	
+
+
+<script>
+    function myFunction(val) {
+      document.getElementById('category').value=val;
+    }
+</script>
 
 
 <script>

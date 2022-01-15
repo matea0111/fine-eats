@@ -1,0 +1,11 @@
+.filter{
+    display:flex;
+}
+.filter-child{
+    margin-right: 1.7em;
+    font-size: 1.3em;
+
+}
+.clear{
+    min-width: fit-content;
+}

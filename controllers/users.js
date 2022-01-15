@@ -66,23 +66,30 @@ module.exports.toggleAdmin = async (req,res) => {
     return res.redirect('back');
 }
 
-// da admin ne moze brisati samog sebe
+// nađemo logiranog usera
 module.exports.deleteUser = async (req,res) => {
-    const id = req.body.id;
-    if (id == req.user.id) {
-        req.flash('error', 'you cannot delete yourself!');
+    const user=await User.findById(req.body.id);
+    if (user.isAdmin) {
+        req.flash('error', 'you cannot delete admin!');
         return res.redirect('back');
     }
 
-    //kad se izbrise user,da se svi restorani prebace na admina koji ga je izbrisa
-    let restaurants= await Restaurant.find().where('author').equals(id);
+    //kad se izbrise user,da se svi restorani prebace na prvog admina na redu
+    const admin=await User.findOne({isAdmin:'true'});
+    let restaurants= await Restaurant.find().where('author').equals(user.id);
     restaurants.forEach ( async restaurant => {
-        restaurant.author= req.user;
+        restaurant.author= admin;
         await restaurant.save();
       }); 
-    await User.findByIdAndDelete(id);
+    try { //brise logiranog usera
+       await User.deleteOne({_id:user.id});
+     } catch (error) {
+      console.error(error);
+    }
+    
     req.flash('success', 'You successfully deleted a User');
-    return res.redirect('back')
+    req.logout();
+    return res.redirect('/restaurants');
 }
 
 
@@ -119,17 +126,19 @@ module.exports.logout=(req,res) =>{
 
 
 
-module.exports.update= (req, res) => {
-    User.findById(req.params.id, function(err, user) {
+module.exports.update= async (req, res) => {
+    console.log(req.params);
+    await User.findById(req.params.id, function(err, user) {
       if(err) {
-        req.flash("error", "Something went wrong.");
+        req.flash("Something went wrong!", err);
         return res.redirect("/");
       }
-    
-      user.firstName = req.firstName;
-      user.lastName = req.lastName;
-      user.save();
-      return res.redirect('back')
+      console.log(user);
+      user.firstName = req.params.firstName;
+      user.lastName = req.params.lastName;
+      console.log(req.body);
+      /* user.save();
+      return res.redirect('back') */
 
      
   });

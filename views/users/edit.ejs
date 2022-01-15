@@ -1,19 +1,39 @@
 <% layout('layouts/boilerplate')%>
-
-<form action="/users/<%=currentUser._id %>/edit" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
-    <div class="mb-3">
+<div>
+    <form action="/users/<%=currentUser._id %>/edit" method="POST" enctype="multipart/form-data">    
+        <div class="mb-3">
         <label class="form-label" for="firstName"> First Name:</label>
-        <input class="form-control" type="text" id="firstName" name="firstName" required
-        value="<%= user.firstName %>" required>
+        <input class="form-control" type="text" id="firstName" name="user[firstName]" required value="<%= user.lastName %>" > </input>
         <div class="valid-feedback">
              Looks good!
         </div>
+    </div>
     <div class="mb-3">
         <label class="form-label" for="lastName"> Last Name:</label>
-        <input class="form-control" type="text" id="lastName" name="lastName" required
-        value="<%= user.lastName %>" required>
+        <input class="form-control" type="text" id="lastName" name="user[lastName]" required value="<%= user.lastName %>"> </input>
         <div class="valid-feedback">
             Looks good!
         </div>
-        <button class="btn btn-dark mt-3">Update</button>
+    </div>
+        <div class="mb-3">
+            <label class="form-label" for="bio">Bio:</label>
+            <input class="form-control" type="text" id="bio" name="user[bio]" >
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div>
+            <input type="hidden" id="id" name="id" value="" ><%=currentUser._id %> </input>
+        </div>
+
+
+        <input type="submit" value="OK" >
+        
 </form>
+
+<form action="/deleteuser" method="POST">
+    <input type="hidden" value="<%=user.id%>" id="id" name="id">
+<button type="submit" class="btn btn-dark mt-3" >Delete this profile? </button>
+</form>
+</div>
+

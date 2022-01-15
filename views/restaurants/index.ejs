@@ -1,23 +1,34 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/CSS/index.css">
 
 <div id="map" style="width:100%; height: 500px; margin-bottom:2em"></div>
 <div class="container" id="restaurants-container">
 <h1></h1>
     <div>
-            <div class="mb-3">
-                <label class="form-label"  for="category">Category</label>
-                <select  onchange="filterCategory(this.value)">
+            <div class="mb-3 filter">
+                <label class="form-label"  for="category" ></label>
+                <select class="btn btn-danger dropdown-toggle btn-lg filter-child" data-bs-toggle="dropdown" aria-expanded="false" onchange="filterCategory(this.value)">
+                    <option value="" disabled selected>Filter by category</option>
                     <% for (const i in categoryList) { %>
                         <option value="<%= categoryList[i].name%>"> <%= categoryList[i].name %> </option>
                     <% } %>
                 </select>
-                <input type="text" name="name" id="nameinput" placeholder="Search by restaurant name" onfocusout="filterName(this.value)">
-                <select  onchange="filterRating(this.value)">
+                <select class="filter-child btn btn-danger dropdown-toggle btn-lg"  data-bs-toggle="dropdown" aria-expanded="false" onchange="filterRating(this.value)">
+                    <option value="" disabled selected>Filter by rating</option>
                    <%  for (let i = 1; i <= 5; i++) { %>
                       <option value="<%= i %>"> <%= i + " or more" %> </option>   
                     <% } %>
                 </select>
-                <a href="/restaurants" class="btn btn-outline-success" >Clear filter</a>
+                <div class="input-group ">
+                    <div class = "form-outline filter-child">
+                        <input type="search" style="min-width: 18em; min-height:100%;" class="  form-control" name="name" id="nameinput" placeholder="Search by name.." onfocusout="filterName(this.value)">
+                     </div>
+                     <button type="button" class="btn btn-primary">
+                        <img src="public\icons\searchicon.png">
+                      </button>
+                </div>
+                
+                <a href="/restaurants" class="btn btn-outline-success btn-lg clear" >Clear filter</a>
             </div>
     </div>
 

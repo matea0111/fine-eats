@@ -12,7 +12,7 @@
 
 body {
     background: #654ea3;
-    background: linear-gradient(to right, #e96443, #904e95);
+    background: linear-gradient(to right,#8cacac, #af8c9d);
     min-height: 100vh;
     overflow-x: hidden
 }
@@ -38,6 +38,9 @@ body {
     bottom: 0.1em;
 }
   
+.mt-0 mb-0{
+  margin-top: 5px;
+}
   
   .restaurant-card:hover {
     box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -53,6 +56,8 @@ body {
     margin-bottom:5px;
   }
   .restaurant-card img{
+    max-height: 12em;
+    min-height: 12em;
     width:100%;
   }
 
