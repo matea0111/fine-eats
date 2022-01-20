@@ -6,15 +6,18 @@
             <!-- Profile widget -->
             <div class="bg-white shadow rounded overflow-hidden">
                 <div class="px-4 pt-0 cover">
+                    <h4 class=" name" style=" display: inline-block;"><%=user.firstName + " " + user.lastName %></h4>
                     <div class="media align-items-end profile-head">
                         <div class="profile-picture mr-3"><img src="<%= user.avatar %>" alt="User avatar" width="130" class="rounded mb-2 img-thumbnail"></div>
                         <div class="media-body mb-5 text-white">
-                            <h4 class="mt-0 mb-0" style=" display: inline-block;"><%=user.firstName + " " + user.lastName %></h4> 
-                            <% if (currentUser.id===user.id || currentUser.isAdmin) {%> 
-                                <a href="/users/<%=currentUser._id %>/edit" class="btn btn-outline-light btn-sm btn-block" style=" display: inline-block; margin-left: 1em;">Edit profile</a>
-                            <% } %>                         
+                          <div class= "bio"> <%= user.bio %> </div>
                         </div> 
                             <div class="counter p-4 justify-content-end text-center ">
+                                <% if (currentUser) {%>
+                                    <% if (currentUser.id===user.id || currentUser.isAdmin) {%> 
+                                        <a href="/users/<%=currentUser._id %>/edit" class="btn btn-outline-light btn-sm btn-block editBtn" style=" display: inline-block; margin-left: 1em;"><span class="btn-text">Edit profile</span></a>
+                                    <% } %>  
+                                <% } %>  
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item">
                                         <h5 class="font-weight-bold mb-0 d-block" style="color:white"><%= restaurantCount %> </h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Restaurants added</small>
