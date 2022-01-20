@@ -70,7 +70,7 @@ module.exports.toggleAdmin = async (req,res) => {
 module.exports.deleteUser = async (req,res) => {
     const user=await User.findById(req.body.id);
     if (user.isAdmin) {
-        req.flash('error', 'you cannot delete admin!');
+        req.flash('error', 'you cannot delete an admin!');
         return res.redirect('back');
     }
 
@@ -88,8 +88,12 @@ module.exports.deleteUser = async (req,res) => {
     }
     
     req.flash('success', 'You successfully deleted a User');
+    if (req.user.isAdmin) {
+      return res.redirect('back');
+    }else{
     req.logout();
     return res.redirect('/restaurants');
+    }
 }
 
 
@@ -127,19 +131,21 @@ module.exports.logout=(req,res) =>{
 
 
 module.exports.update= async (req, res) => {
-    console.log(req.params);
     await User.findById(req.params.id, function(err, user) {
       if(err) {
         req.flash("Something went wrong!", err);
         return res.redirect("/");
       }
-      console.log(user);
-      user.firstName = req.params.firstName;
-      user.lastName = req.params.lastName;
-      console.log(req.body);
-      /* user.save();
-      return res.redirect('back') */
+      user.firstName = req.body.firstName;
+      user.lastName = req.body.lastName;
+      user.bio = req.body.bio;
 
-     
+      user.save();
+      return res.redirect('/users/' +  req.user.id);
+
   });
+}
+
+module.exports.updateAvatar = async(req,res) => {
+      console.log(req.body, req.file);
 }

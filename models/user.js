@@ -12,6 +12,10 @@ const UserSchema = new Schema({
 
     firstName: String,
     lastName: String,
+    bio: {
+        type: String,
+        default: ""
+    },
     isAdmin:{
         type: Boolean,
         default: false

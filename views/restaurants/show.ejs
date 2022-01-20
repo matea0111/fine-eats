@@ -31,26 +31,26 @@
             <% } %> 
       </div>
       <div class="card mb-3 ml-5">
-        <h5 class="card-title mt-3 mb-3" style="margin-left: 10px;">
+        <h5 class="card-title mt-3 mb-3" style="margin-left: 10px; font-size: 3em;">
          <strong> <%= restaurant.title %></strong>
         </h5>
         <div class="card-body">
-          <p class="card-text">
+          <p class="card-text" style="font-family: 'Roboto', sans-serif;">
             <%= restaurant.description %>
           </p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
             <%= restaurant.location %>
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
             Restaurant type: <%=restaurant.category[0] %>
             
           </li>
-          <li class="list-group-item"> Submitted by:
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;"> Submitted by:
             <a href="/users/<%=restaurant.author.id%>"><%= restaurant.author.username %></a>
           </li>
-          <li class="list-group-item">
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
             <%= restaurant.price %>/5 $
           </li>
         </ul>
@@ -72,8 +72,8 @@
     
 
       <% if(currentUser) { %>
-        <div class="rating"> 
-        <h2>LEAVE A REVIEW!</h2>
+        <div class="rating" style="font-family: 'Roboto Slab', serif;"> 
+        <h2 style="font-size: 2.5em;">LEAVE A REVIEW!</h2>
         <p id="status" class="d-none my-0 text-danger">Please Select Rating</p>
         <form class="mb-3 needs-validation reviewForm" action="/restaurants/<%=restaurant._id%>/reviews" method="POST" novalidate>
           <div class="mb-3">
@@ -107,8 +107,8 @@
             }
             </script>
         <div class="mb-3">
-          <label class="form-label" for="body"></label>
-          <textarea class="form-control" name="review[body]" id="body" cols="30" rows="4" required placeholder="Leave a comment about your visit!"></textarea>
+          <label class="form-label" for="reviewBody"></label>
+          <textarea class="form-control reviewField" name="review[body]" id="reviewBody" cols=50 rows=4 maxlength="127" required placeholder="Leave a comment about your visit!"></textarea>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -153,6 +153,18 @@
   </div>
   </div>
 
- <script src="/js//mapSP.js"></script>
+ <script src="/js//mapSP.js"> </script>
+ <script> 
+ let test = document.getElementById("reviewBody");
 
- 
+  test.onpaste = function(e){
+      //do some IE browser checking for e
+      var max = test.getAttribute("maxlength");
+      e.clipboardData.getData('text/plain').slice(0, max);
+  };
+  </script>
+
+ <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+  </style>

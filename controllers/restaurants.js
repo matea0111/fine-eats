@@ -53,7 +53,6 @@ module.exports.createRestaurant = async (req,res,next) => {
         limit:1
     }).send()
     const restaurant = new Restaurant(req.body.restaurant);
-    console.log(req.files);
     restaurant.images=req.files.map(f => ({url: f.path, filename: f.filename}));
     if (restaurant.images.length===0) {
         var nophoto = [

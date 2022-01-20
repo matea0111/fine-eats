@@ -36,11 +36,6 @@ const seedDB= async() => {
             price,
             images: [
                 {
-
-                  url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/bddzw1rbptmd8xtzjbmp.jpg',
-                  filename: 'FineEats/bddzw1rbptmd8xtzjbmp'
-                },
-                {
                   url: 'https://res.cloudinary.com/dx4xgystc/image/upload/v1635006414/FineEats/bddzw1rbptmd8xtzjbmp.jpg',
                   filename: 'FineEats/bddzw1rbptmd8xtzjbmp'
                 },
@@ -59,7 +54,6 @@ const seedDB= async() => {
          })
         await rest.save() 
         }
-    
 }
 
 seedDB().then(() => {

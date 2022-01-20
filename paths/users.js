@@ -49,6 +49,8 @@ router.route("/users/:id/edit")
 router.route("/users/:id/edit")
 .post(isLoggedIn, checkProfileOwnership, users.update);
 
+router.route("/users/:d/edit/avatar")
+.post(isLoggedIn, checkProfileOwnership, users.updateAvatar);
 
 module.exports = router;
 

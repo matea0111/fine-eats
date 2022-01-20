@@ -6,6 +6,8 @@ if (process.env.NODE_ENV !== "production") {
 const express = require ('express');
 const path = require ('path');
 const mongoose = require('mongoose');
+
+
 const ejsMate = require ('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -30,8 +32,6 @@ mongoose.connect('mongodb://localhost:27017/fine-eats', {
     useUnifiedTopology: true,
     useFindAndModify:false
 });
-
-
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

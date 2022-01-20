@@ -55,8 +55,8 @@
 
                 <div class="row" id="allReviews" style="display: none;">
                 <% for (let review of reviews) { %>
-                    <a href="/restaurants/<%= review.restaurant._id%>"> 
-                    <div class=" ratings d-flex justify-content-center col-sm-3 ">
+                    <a href="/restaurants/<%= review.restaurant._id%>" class="col-3 stretched-link"> 
+                    <div class=" ratings d-flex justify-content-center">
                         <div class="text-center">
                             <div class="">
                                 <div>
@@ -67,7 +67,6 @@
                                  </div>
                                 <div>
                                     Added on: <%= review.restaurant.title %>
-                                    <% console.log(review.restaurant) %> 
                                 </div>
                             </div>
                         </div>

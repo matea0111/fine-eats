@@ -270,3 +270,7 @@
   .rating{
     margin-top:4em;
   }
+
+  body{
+    background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+  }

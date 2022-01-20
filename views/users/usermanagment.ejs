@@ -6,6 +6,7 @@
         <th scope="col">Username</th>
         <th scope="col">E-Mail</th>
         <th scope="col">Is admin?</th>
+        <th scope="col"></th>
         <th scope="col"> </th>
       </tr>
     </thead>
@@ -25,9 +26,12 @@
             <input type="hidden"  value=<%=users[user]._id %> id="id"  name="id">
             </form>
             <label class="form-check-label" for="isAdmin" checked=></label>
-            </div></td>
+            </div>
+        </td>
+        <td>
+          <a href="/users/<%= users[user]._id %> "class="btn btn-outline-danger mt-1"> View profile</a>
+        </td>
         <td> 
-          
             <form action="/deleteuser"  method="POST">
                 <button type="submit" value=<%=users[user]._id %> id="id" name="id" class="btn btn-outline-primary">DELETE USER</button>
             </form>

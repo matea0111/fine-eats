@@ -34,7 +34,11 @@
                 <input class="form-control" type="hidden" id="category" value="<%=categoryList[0].name%>" name="restaurant[category]" required> 
                 <select  onchange="myFunction(this.value)">
                     <% for (const i in categoryList) { %>
-                        <option value="<%= categoryList[i].name %>"> <%= categoryList[i].name %> </option>
+                        <option value="<%= categoryList[i].name %>" 
+                           <% if(restaurant.category[0] == categoryList[i].name) { %>
+                                selected='selected'
+                          <% } %>
+                            > <%= categoryList[i].name %> </option>
                     <% } %>
                 </select>
             </div>
