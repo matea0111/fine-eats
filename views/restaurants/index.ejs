@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<div id="map" style="width:100%; height: 500px; margin-bottom:2em"></div>
+<div id="map" class="clustermap"></div>
 <div class="container" id="restaurants-container">
 <h1></h1>
     <div class="filter" >
@@ -22,14 +22,14 @@
                     <% } %>
                 </select>
                 <div class="input-group ">
-                    <div class = "form-outline filter-child">
+                    <div class = "form-outline filter-child" style="display:inline-flex;">
                         <input type="search" style="min-width: 18em; min-height:100%;" class="form-control" name="name" id="nameinput" placeholder="Search by name.." onfocusout="filterName(this.value)">
+                        <button type="button" class="btn btn-danger"> <i class="fa fa-search"></i>
+                         </button>
                      </div>
-                     <button type="button" class="btn btn-danger"> <i class="fa fa-search"></i>
-                      </button>
                 </div>
                 
-                <a href="/restaurants" class="btn btn-outline-success btn-lg clear" >Clear filter</a>
+                <a href="/restaurants" class="btn btn-outline-dark clear" >Clear filter</a>
             </div>
     </div>
 

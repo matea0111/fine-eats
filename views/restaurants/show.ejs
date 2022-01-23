@@ -9,7 +9,7 @@
 </script>
 
 
-  <div class="row" >
+  <div class="row parent" >
     <div class="col-6 ">
       <div id="restaurantCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -30,7 +30,7 @@
             </a>
             <% } %> 
       </div>
-      <div class="card mb-3 ml-5">
+      <div class="card mb-3 ml-5 details">
         <h5 class="card-title mt-3 mb-3" style="margin-left: 10px; font-size: 3em;">
          <strong> <%= restaurant.title %></strong>
         </h5>
@@ -73,8 +73,8 @@
         </div>
       </div>
     </div>
-    <div class="col-6"> 
-      <div id='map' style='width: 500px; height: 400px;'></div>
+    <div class="col-6 comments"> 
+      <div id='map' class="karta" ></div>
     
 
       <% if(currentUser) { %>

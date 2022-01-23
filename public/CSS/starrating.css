@@ -255,7 +255,10 @@
   }
 
 
-
+.karta{
+  width: 500px; 
+  height: 400px;
+}
 
   .review{
     margin-top:1em;
@@ -273,4 +276,16 @@
 
   body{
     background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+    width: 100vw;
+  
+  }
+
+  @media screen and (max-width: 800px) {
+    .parent{
+      display:grid;
+    }
+    .karta,.carousel,.details,.rating,.comments{
+      width:95vw;
+    }
+    
   }
