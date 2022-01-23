@@ -24,7 +24,6 @@ module.exports.index = async (req, res) => {
             }
         });
         const categoryList = await Category.find({}); 
-        
         res.render('restaurants/index', {restaurants,categoryList,restaurantsAll});
     } else {
         const {page}= req.query;
@@ -42,7 +41,6 @@ module.exports.AddNewForm = async(req, res) => {
     const restaurantList = await Restaurant.find();
     const categoryList = await Category.find({}); 
     restaurantList.forEach(()=>{
-
     })
     res.render('restaurants/new', {categoryList} );
 }
@@ -68,7 +66,6 @@ module.exports.createRestaurant = async (req,res,next) => {
           ];
           restaurant.images=nophoto.map(f => ({url: f.path, filename: f.filename}));
     }
-
     restaurant.geometry = geoData.body.features[0].geometry;
     restaurant.author = req.user._id;
     await restaurant.save();
@@ -87,7 +84,6 @@ module.exports.restaurantInfo = async (req,res) => {
         req.flash('error','Cannot find that restaurant');
         res.redirect('/restaurants');
     }
-
     const categoryList = await Category.find({});
     res.render('restaurants/show', {restaurant, categoryList});
 }

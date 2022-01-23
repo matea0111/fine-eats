@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/CSS/addrestaurant.css">
 
 
+
 <div class="register-photo">
     <div class="form-container">
         <div class="image-holder"></div>
@@ -30,6 +31,27 @@
                   </div>
             </div> 
             <div class="mb-3">
+                <label class="form-label" for="open"></label>
+                 
+                <input class="form-control" type="time" id="open" name="restaurant[openingTime]" value="<%=restaurant.openingTime%>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide opening time.
+                </div>
+            </div> 
+            <div class="mb-3">
+                <label class="form-label" for="close"></label>
+                <input class="form-control" type="time" id="close" name="restaurant[closingTime]"value="<%=restaurant.closingTime%>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide closing time.
+                </div>
+            </div> 
+            <div class="mb-3">
                 <label class="form-label"  for="category">Category</label>
                 <input class="form-control" type="hidden" id="category" value="<%=categoryList[0].name%>" name="restaurant[category]" required> 
                 <select  onchange="myFunction(this.value)">
@@ -42,7 +64,16 @@
                     <% } %>
                 </select>
             </div>
-            
+            <div class="mb-3">
+                <label class="form-label" for="phone">Telephone number:</label>
+                <input class="form-control" type="tel" id="phone" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{3,4}$" name="restaurant[phoneNumber]"value="<%=restaurant.phoneNumber%>" >
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide phone number.
+                </div>
+            </div> 
             <div class="mb-3">
                 <label class="form-label">Choose Image(s)</label>
                 <div class="form-file custom-file">
@@ -94,6 +125,7 @@
         </form>
     </div>
 </div>	
+
 
 
 <script>

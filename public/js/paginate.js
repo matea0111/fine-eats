@@ -11,7 +11,6 @@ paginate.addEventListener('click', function (e) {
                 let template = generateRestaurant(restaurants);
                 $restaurantsContainer.append(template);
             }
-            console.log(hasNextPage);
             let { nextPage } = data;
             //restaurants.features.push(...data.docs);
             //map.getSource('restaurants').setData(restaurants);

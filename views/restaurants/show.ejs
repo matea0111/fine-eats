@@ -39,13 +39,19 @@
             <%= restaurant.description %>
           </p>
         </div>
+        
         <ul class="list-group list-group-flush">
           <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
             <%= restaurant.location %>
           </li>
           <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
+           Working hours:  <%= restaurant.openingTime%> - <%= restaurant.closingTime %> 
+          </li>
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
             Restaurant type: <%=restaurant.category[0] %>
-            
+          </li>
+          <li class="list-group-item" style="font-family: 'Roboto', sans-serif;">
+            Restaurant phone number: <%=restaurant.phoneNumber %>
           </li>
           <li class="list-group-item" style="font-family: 'Roboto', sans-serif;"> Submitted by:
             <a href="/users/<%=restaurant.author.id%>"><%= restaurant.author.username %></a>

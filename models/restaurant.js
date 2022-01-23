@@ -3,10 +3,6 @@ const Review = require('./review');
 const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate-v2');
 
-
-
-
-
 const opts = { toJSON : {virtuals:true}};
 
 const RestaurantSchema = new Schema({
@@ -51,6 +47,15 @@ const RestaurantSchema = new Schema({
     averageRating:{ 
         type: Schema.Types.Number,
         default: 0.1
+    },
+    phoneNumber: {
+        type: Schema.Types.String,
+    },
+    openingTime:{
+        type: Schema.Types.String,
+    },
+    closingTime:{
+        type: Schema.Types.String,
     }
 },opts);
 

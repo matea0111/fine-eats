@@ -10,6 +10,10 @@ module.exports.restaurantSchema = Joi.object({
         price: Joi.string().required().min(1),
         //image: Joi.string().required(),
         description: Joi.string().allow(''),
+        phoneNumber: Joi.string().trim(),
+        openingTime: Joi.string().trim().min(1).required(),
+        closingTime: Joi.string().trim().min(1).required(),
+        
     }).required(),
     deleteImages:Joi.array()
 });

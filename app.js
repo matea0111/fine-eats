@@ -13,12 +13,10 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const ExError = require('./helpers/ExError');
 const methodOverride = require ('method-override');
-const restaurants=require('./paths/restaurants');
-const reviews=require('./paths/reviews');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-const _ = require('lodash');
+
 
 
 
@@ -81,9 +79,6 @@ app.use((req, res, next) => {
     next();
 })
 
-const scriptSrcUrls = [
-    "https://code.jquery.com"
-];
 
 app.use('/', userRoutes)
 app.use('/restaurants', restaurantRoutes)
@@ -98,7 +93,7 @@ app.all('*', (req, res, next) => {
     next(new ExError('Page Not Found!',404))
 })
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     const {statusCode=500} = err;
     if(!err.message) err.message = 'Something Went Wrong'
     res.status(statusCode).render('error', {err})
