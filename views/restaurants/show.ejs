@@ -143,12 +143,12 @@
             </p>    
             <% if (!review.author && currentUser){%> 
               <% if(currentUser.isAdmin){ %>   
-            <form id="deleteRest" action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-outline-danger"  onclick="checker()"> Delete</button>
+            <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+              <button type="button" class="btn btn-outline-danger" > Delete</button>
           </form>
           <% }} else if ((currentUser && review.author.equals(currentUser._id ) || currentUser && currentUser.isAdmin)) {%> 
-            <form id="deleteRest2" action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-outline-danger"  onclick="checker2()" >Delete</button>
+            <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+              <button type="button" class="btn btn-outline-danger" >Delete</button>
           </form>
           <% } %> 
             </div>
@@ -168,23 +168,6 @@
       var max = test.getAttribute("maxlength");
       e.clipboardData.getData('text/plain').slice(0, max);
   };
-  </script>
-
-<script>
-function checker(){
-  if(window.confirm("Are you sure")){
-    document.getElementById("deleteRest").submit();
-  } else {
-    return;
-  }
-}
-function checker2(){
-  if(window.confirm("Are you sure")){
-    document.getElementById("deleteRest2").submit();
-  } else {
-    return;
-  }
-}
   </script>
 
  <style>

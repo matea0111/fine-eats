@@ -7,15 +7,12 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', function () {
-    // Add a new source from our GeoJSON data and
-    // set the 'cluster' option to true. GL-JS will
-    // add the point_count property to your source data.
     map.addSource('restaurants', {
         type: 'geojson',
         data: all,
         cluster: true,
-        clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        clusterMaxZoom: 14, 
+        clusterRadius: 50 
     });
 
     map.addLayer({

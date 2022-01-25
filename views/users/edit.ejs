@@ -1,43 +1,47 @@
+<link rel="stylesheet" href="/CSS/useredit.css">
 <% layout('layouts/boilerplate')%>
-<div>
-    <form action="/users/<%=currentUser._id %>/edit" method="POST">    
-        <div class="mb-3">
-            <label class="form-label" for="firstName"> First Name:</label>
-            <input class="form-control" type="text" id="firstName" name="firstName" required value="<%= user.firstName %>" /> 
-            <div class="valid-feedback">
-                Looks good!
+
+<div class="content">
+    <form action="/users/<%=currentUser._id %>/edit" method="POST"  enctype="multipart/form-data" style="width:70%;">    
+        <div class= "row">
+            <div class="mb-3 col-6 form-floating">
+                <input class="form-control" type="text" id="firstName" name="firstName" required value="<%= user.firstName %>" placeholder="First name"/> 
+                <label for="firstName"> First Name:</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3 col-6 form-floating">
+                <input class="form-control" type="text" id="lastName" name="lastName" required value="<%= user.lastName %>" placeholder="Last name"/> 
+                <label class="form-label" for="lastName"> Last Name:</label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="lastName"> Last Name:</label>
-            <input class="form-control" type="text" id="lastName" name="lastName" required value="<%= user.lastName %>"/> 
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="bio">Bio:</label>
+        <div class="mb-3 form-floating">
             <textarea class="form-control" style="min-height: 10em;" type="text" id="bio" name="bio"> <%= user.bio %>  </textarea>
+            <label class="form-label" for="bio">Bio:</label>
             <div class="valid-feedback">
                 Looks good!
             </div>
         </div>
-         
-        <input type="submit" value="Update" />
-        
+        <div>
+                <input type="file" id="avatar" name="avatar" class="form-control form-control-lg">
+        </div>
+        <input type="submit" class="btn btn-success mt-3 btn-lg" style="margin-left:45%" value="Update" />
 </form>
-</div>
-<div>
-    <form action="/users/<%=currentUser._id %>/edit/avatar" method="POST" enctype="multipart/form-data">
-            <label class="form-label">Choose Image</label>
-                <input type="file" id="avatar" name="avatar">
-        <input type="submit" value="Update avatar" />
-    </form>
 </div>
 
-<form action="/deleteuser" method="POST">
-    <input type="hidden" value="<%=user.id%>" id="id" name="id">
-<button type="submit" class="btn btn-dark mt-3" >Delete this profile? </button>
-</form>
+    <div class="buttons">
+        <a href="/users/<%= user._id%>"class="btn btn-outline-dark mt-3"> Back to the restaurant</a> 
+
+        <form action="/deleteuser" method="POST" class="deleteUser">
+            <input type="hidden" value="<%=user.id%>" id="id" name="id">
+            <button type="submit" class="btn btn-dark mt-3">Delete this profile? </button>
+        </form>
+    </div>
 </div>
+
+
 

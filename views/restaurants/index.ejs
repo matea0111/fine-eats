@@ -71,8 +71,8 @@
 
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-     const restaurants = {items:<%- JSON.stringify(restaurants.docs) %>}
-     console.log(restaurants);
+    const restaurants = {items:<%- JSON.stringify(restaurants.docs) %>}
+
     const all = {features:<%- JSON.stringify(restaurantsAll) %>}
 
 </script>

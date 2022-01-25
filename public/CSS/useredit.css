@@ -1,0 +1,17 @@
+.deleteUser{
+    display: flex;
+    flex-direction: row-reverse;
+    width:85%;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    display: flex;
+    margin-left: 15%;
+    justify-content: space-between;
+    width: 70%;
+}

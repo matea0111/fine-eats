@@ -131,6 +131,7 @@ module.exports.logout=(req,res) =>{
 
 
 module.exports.update= async (req, res) => {
+    console.log(req.body,req.file);
     await User.findById(req.params.id, function(err, user) {
       if(err) {
         req.flash("Something went wrong!", err);
@@ -139,6 +140,7 @@ module.exports.update= async (req, res) => {
       user.firstName = req.body.firstName;
       user.lastName = req.body.lastName;
       user.bio = req.body.bio;
+      user.avatar=req.file.path;
 
       user.save();
       return res.redirect('/users/' +  req.user.id);
