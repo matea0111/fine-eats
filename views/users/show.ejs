@@ -84,8 +84,13 @@
 <script>
     function toggleRestaurants() {
         var x = document.getElementById("allRestaurants");
+        console.log(screen.width);
         if (x.style.display === "none") {
-            x.style.display = "";
+            if (screen.width < 800)
+            {
+                x.style.display="block";
+            }else {
+            x.style.display = ""};
         } else {
             x.style.display = "none";
         }
@@ -94,7 +99,11 @@
 function toggleReviews() {
     var x = document.getElementById("allReviews");
     if (x.style.display === "none") {
-        x.style.display = "";
+        if (screen.width < 800)
+            {
+                x.style.display="block";
+            }else {
+        x.style.display = "" };
     } else {
         x.style.display = "none";
     }

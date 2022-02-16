@@ -136,3 +136,14 @@ body {
 .stretched-link::after {
   all:unset;
 }
+
+@media screen and (max-width: 800px) {
+  .editBtn{
+    width: 40vw;
+  
+  }
+  .counter{
+    position: inherit;
+  }
+  
+}
