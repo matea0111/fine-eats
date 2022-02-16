@@ -144,11 +144,11 @@
             <% if (!review.author && currentUser){%> 
               <% if(currentUser.isAdmin){ %>   
             <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-outline-danger" > Delete</button>
+              <button class="btn btn-outline-danger" > Delete</button>
           </form>
           <% }} else if ((currentUser && review.author.equals(currentUser._id ) || currentUser && currentUser.isAdmin)) {%> 
             <form action="/restaurants/<%=restaurant._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-outline-danger" >Delete</button>
+              <button class="btn btn-outline-danger" >Delete</button>
           </form>
           <% } %> 
             </div>

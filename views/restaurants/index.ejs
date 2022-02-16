@@ -36,21 +36,26 @@
 <% for (let restaurant of restaurants.docs) {%>
     <div class="card border-0 mb-2">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <img class="img-fluid" alt="picture" src="<%=restaurant.images[0].url%>">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="card-body">
                     <h5 class="card-title"><%= restaurant.title %></h5>
                     <p class="card-text"><%= restaurant.description %></p>
                     <p class="card-text">
-                        <small class="text-muted">Working hours:<%= restaurant.openingTime %> - <%= restaurant.closingTime %> </small>
+                        <% if (restaurant.isOpen) { %>
+                            <span class="btn btn-success disabled" >Open</span>
+                         <%} else { %>
+                             <span class="btn btn-danger disabled">Closed</span>
+                        <% } %> 
+                        <small class="text-muted ">Working hours: <%= restaurant.openingTime %> - <%= restaurant.closingTime %> </small>
                     </p>
                     <p class="card-text">
                         <small class="text-muted"><%= restaurant.location %></small>
                     </p>
                     <p class="card-text">
-                        <small class="text-muted"><%= restaurant.averageRating %></small>
+                        <small class="text-muted">Average rating: <%= restaurant.averageRating.toFixed(2) %></small>
                     </p>
                     <a class="btn btn-outline-success" href="/restaurants/<%= restaurant._id%>"> View <%= restaurant.title%></a>
                 </div>
@@ -63,8 +68,9 @@
 <% if (restaurants.nextPage) { %>
 <div class="text-center mb-5">
     <a href="/restaurants?page=<%= restaurants.nextPage%> " id="paginate" class="btn btn-primary"> View more</a>
-</div>
+    
 
+</div>
 <% } %>
 
 
@@ -74,12 +80,7 @@
     const restaurants = {items:<%- JSON.stringify(restaurants.docs) %>}
 
     const all = {features:<%- JSON.stringify(restaurantsAll) %>}
-
 </script>
-
-<!-- <script src="/node_modules/moment/">
-    console.log(moment(restaurant.openingTime).format('HH:mm'));
-</script> -->
 
  <script src = "/js//clusterMap.js"></script> 
  <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>

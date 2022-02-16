@@ -6,6 +6,7 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken});
 const {cloudinary} = require("../cloudinary"); 
 const restaurant = require('../models/restaurant');
 const _ = require('lodash');
+const isOpen = require('../public/js/isOpen');
 
 
 
@@ -24,6 +25,9 @@ module.exports.index = async (req, res) => {
             }
         });
         const categoryList = await Category.find({}); 
+        for(let restaurant of restaurants.docs){
+            restaurant.isOpen=isOpen(restaurant.openingTime+ '|'+ restaurant.closingTime);
+        }
         res.render('restaurants/index', {restaurants,categoryList,restaurantsAll});
     } else {
         const {page}= req.query;
@@ -33,6 +37,9 @@ module.exports.index = async (req, res) => {
                 path: 'popupText'
             }
         });
+        for(let restaurant of restaurants.docs){
+            restaurant.isOpen=isOpen(restaurant.openingTime+ '|'+ restaurant.closingTime);
+        }
         res.status(200).json(restaurants);
     }
 } 
