@@ -24,6 +24,9 @@ router.route('/login')
 router.route("/manage")
 .get(isLoggedIn, users.manage)
 
+router.route("/manage")
+.post(isLoggedIn, users.manage)
+
 router.route('/toggleAdmin')
 .post(isLoggedIn, users.toggleAdmin)
 

@@ -1,5 +1,17 @@
 <% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/CSS/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+<form id="search" action="/manage"  method="POST" style="display:flex; padding-bottom: 1em;">
+  <div class="input-group" style="float: right; justify-content: flex-end;">
+    <div class = "form-outline filter-child" style="display:inline-flex;">
+        <input type="search" style="min-width: 18em; min-height:100%;" class="form-control" name="name" id="nameinput" placeholder="Search by e-mail.." onfocusout="filterUser(this.value)">
+        <button type="button" class="btn btn-danger"> <i class="fa fa-search"></i>
+        </button>
+    </div>
+  </div>
+</form>
 <table class="table table-striped table-dark">
     <thead>
       <tr>
@@ -41,3 +53,10 @@
     </tbody>
   </table>
 
+<script>
+    function filterUser(val) {
+      document.getElementById("search").submit();
+
+      //window.location.replace('/manage?value='.concat(val));
+    }
+</script>

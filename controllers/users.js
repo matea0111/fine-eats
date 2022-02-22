@@ -49,8 +49,14 @@ module.exports.Login = (req, res) => {
 
 
 module.exports.manage = async(req, res) => {
-    const users = await User.find({});  
-    res.render('users/usermanagment', {users: users});
+  let user = req.body['name'];
+  let query = {};
+  if(user){
+    query = {email: { $regex: new RegExp(user), $options: "i"  }};
+  }
+  let result = await User.find(query);  
+  res.render('users/usermanagment', {users: result});
+
 }
 
 
