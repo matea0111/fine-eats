@@ -23,7 +23,7 @@
                 </select>
                 <div class="input-group ">
                     <div class = "form-outline filter-child" style="display:inline-flex;">
-                        <input type="search" style="min-width: 18em; min-height:100%;" class="form-control" name="name" id="nameinput" placeholder="Search by name.." onfocusout="filterName(this.value)">
+                        <input type="search" style="min-width: 18em; min-height:100%;" class="form-control" name="name" id="nameinput" placeholder="Search by name.." onKeyDown="if(event.keyCode==13) filterName(this.value)" onfocusout="filterName(this.value)">
                         <button type="button" class="btn btn-danger"> <i class="fa fa-search"></i>
                          </button>
                      </div>

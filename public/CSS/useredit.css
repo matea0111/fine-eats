@@ -16,3 +16,10 @@
     width: 70%;
 }
 
+.border{
+    border-left:solid lightgrey 1px;
+    border-bottom: solid lightgray 1px;
+}
+.hover:hover{
+    background-color: #cc2885;
+}

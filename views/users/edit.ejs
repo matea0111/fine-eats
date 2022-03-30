@@ -1,47 +1,51 @@
 <link rel="stylesheet" href="/CSS/useredit.css">
+<link rel="stylesheet" href="/CSS/registerform.css">
 <% layout('layouts/boilerplate')%>
 
-<div class="content">
-    <form action="/users/<%=currentUser._id %>/edit" method="POST"  enctype="multipart/form-data" style="width:70%;">    
-        <div class= "row">
-            <div class="mb-3 col-6 form-floating">
-                <input class="form-control" type="text" id="firstName" name="firstName" required value="<%= user.firstName %>" placeholder="First name"/> 
-                <label for="firstName"> First Name:</label>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3 col-6 form-floating">
-                <input class="form-control" type="text" id="lastName" name="lastName" required value="<%= user.lastName %>" placeholder="Last name"/> 
-                <label class="form-label" for="lastName"> Last Name:</label>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-        </div>
-        <div class="mb-3 form-floating">
-            <textarea class="form-control" style="min-height: 10em;" type="text" id="bio" name="bio"> <%= user.bio %>  </textarea>
-            <label class="form-label" for="bio">Bio:</label>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-        </div>
-        <div>
-                <input type="file" id="avatar" name="avatar" class="form-control form-control-lg">
-        </div>
-        <input type="submit" class="btn btn-success mt-3 btn-lg" style="margin-left:45%" value="Update" />
-</form>
-</div>
 
-    <div class="buttons">
-        <a href="/users/<%= user._id%>"class="btn btn-outline-dark mt-3"> Back to the restaurant</a> 
+    <div class="buttons ">
+        <a href="/users/<%= user._id%>"class="btn btn-outline-dark mt-3 mb-3" > Back to the profile</a> 
 
         <form action="/deleteuser" method="POST" class="deleteUser">
             <input type="hidden" value="<%=user.id%>" id="id" name="id">
-            <button type="submit" class="btn btn-dark mt-3">Delete this profile? </button>
+            <button type="submit" class="hover btn btn-dark mt-3 mb-3" style="background-color: #a60661; border-color: #a60661;">Delete this profile? </button>
         </form>
     </div>
-</div>
 
 
 
+
+
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder"></div>
+        <form action="/users/<%=currentUser._id %>/edit" method="POST"  enctype="multipart/form-data" style="width:70%;"> 
+            <h2 class="text-center"><strong>Edit</strong> profile.</h2>
+            <div class="mb-3">
+                <label class="form-label" for="firstName"></label>
+                <input class="form-control border" type="text" id="firstName" name="firstName" required value="<%= user.firstName %>" placeholder="First name"/>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="lastName"></label>
+                <input class="form-control border" id="lastName" name="lastName" required value="<%= user.lastName %>" placeholder="Last name"/> 
+                <div class="valid-feedback">
+                    Looks good!
+                </div>  
+            <div class="mb-3">
+                <label class="form-label" for="bio"></label>
+                <textarea class="form-control border" style="min-height: 10em;" type="text" id="bio" name="bio"> <%= user.bio %>  </textarea>
+                <div class="valid-feedback">
+                     Looks good!
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="avatar"></label>
+                <input type="file" id="avatar" name="avatar" class="form-control form-control-lg">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <input type="submit" class="btn btn-success mt-3 btn-lg" style="margin-left:45%" value="Update" />
+        </form>
+    </div>
+</div>				            

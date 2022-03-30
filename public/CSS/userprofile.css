@@ -99,22 +99,17 @@ body {
 
 .ratings {
     background-color: #fff;
-    padding: 54px;
+    padding-left:1em;
+    padding-right: 1em;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0px 10px 10px #E0E0E0;
     margin: 1em;
-    width: 18em;
-    height: 15em;
-    max-height: min-content;
-    max-width: 18em;
+    height: 18em;
     align-items: center;
     overflow: auto;
     transition: width 5s ease-in;
 }
-.commentcard{
-  transition: width 5s ease-in;
 
-}
 
 .ratings .commentcard:hover{
   box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -154,4 +149,14 @@ body {
     position: inherit;
   }
   
+}
+
+.mark{
+  
+  font-size: 2em;
+  font-weight: bold;
+  background-color: transparent;
+}
+.comment{
+  font-size: 1.3em;
 }

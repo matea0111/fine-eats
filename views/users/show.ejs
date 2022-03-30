@@ -58,18 +58,18 @@
 
                 <div class="row" id="allReviews" style="display: none;">
                 <% for (let review of reviews) { %>
-                    <a href="/restaurants/<%= review.restaurant._id%>" class="col-3 stretched-link commentcard"> 
-                    <div class=" ratings d-flex justify-content-center">
+                    <a href="/restaurants/<%= review.restaurant._id%>" class="col-6 stretched-link commentcard"> 
+                    <div class=" ratings d-flex justify-content-center cover" style="color: white;">
                         <div class="text-center">
                             <div class="">
-                                <div>
+                                <div class="comment">
                                     <%= review.body %>
                                 </div>
-                                 <div>
+                                 <div class="mark">
                                      <%= review.rating %> / 5
                                  </div>
                                 <div>
-                                    Added on: <%= review.restaurant.title %>
+                                    Added on: <i><%= review.restaurant.title %></i>
                                 </div>
                             </div>
                         </div>
