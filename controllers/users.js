@@ -79,7 +79,6 @@ module.exports.deleteUser = async (req,res) => {
         req.flash('error', 'you cannot delete an admin!');
         return res.redirect('back');
     }
-
     //kad se izbrise user,da se svi restorani prebace na prvog admina na redu
     const admin=await User.findOne({isAdmin:'true'});
     let restaurants= await Restaurant.find().where('author').equals(user.id);
@@ -92,7 +91,6 @@ module.exports.deleteUser = async (req,res) => {
      } catch (error) {
       console.error(error);
     }
-    
     req.flash('success', 'You successfully deleted a User');
     if (req.user.isAdmin) {
       return res.redirect('back');

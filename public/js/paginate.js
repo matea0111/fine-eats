@@ -1,5 +1,26 @@
 const paginate = document.getElementById('paginate');
 const $restaurantsContainer = $('#restaurants-container');
+
+function isOpen(time){
+    var opening = time.substring(0, time.indexOf("|"));
+    var closing = time.substring(time.indexOf("|")+1);
+    var currentTime = new Date();
+    var open = new Date();
+    var close = new Date();
+    open.setHours(opening.substring(0, 2),opening.substring(3,5),0); // 5.30 pm
+    close.setHours(closing.substring(0, 2),closing.substring(3,5),0); // 6.30 pm
+
+    var afterMidnight = new Date();
+    afterMidnight.setHours(00,00,00);
+
+    if((currentTime >= open && currentTime < close )){
+        return true;
+    }else{
+        return false;
+    }  
+}
+
+
 paginate.addEventListener('click', function (e) {
     console.log(this);
     e.preventDefault();
@@ -27,6 +48,7 @@ paginate.addEventListener('click', function (e) {
 
 function generateRestaurant(restaurant) {
    let open = '';
+   restaurant.isOpen=isOpen(restaurant.openingTime+ '|'+ restaurant.closingTime);
    if (restaurant.isOpen) {
     open = '<span class="btn btn-success disabled" >Open</span>';
   } else {
